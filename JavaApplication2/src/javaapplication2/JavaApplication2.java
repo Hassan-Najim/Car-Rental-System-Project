@@ -20,5 +20,5 @@ public class JavaApplication2 {
         System.out.println("hello world");
         System.out.println(x);
     }
-    
+
 }
