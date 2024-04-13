@@ -1,24 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package javaapplication2;
 
-/**
- *
- * @author hassa
- */
 public class JavaApplication2 {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
-        System.out.println("hello");
-        int x = 5;
-        System.out.println("hello world");
-        System.out.println(x);
+        testCarInfo();
     }
 
+    private static void testCarInfo() {
+        // Simulate car information with dummy data
+
+        int carId = 123;
+        String carType = "Sedan";
+        String carBrand = "Honda";
+        String carModel = "Civic";
+        String carColor = "blue";
+        String carCredentials = "ABC123";
+        boolean isAvailable = true;
+        double hourlyRate = 35.00;
+
+        CarInfo carInfo = new CarInfo.CarInfoBuilder(carId)
+                .carType(carType)
+                .carBrand(carBrand)
+                .carModel(carModel)
+                .carColor(carColor)
+                .carCredentials(carCredentials)
+                .isAvailable(isAvailable)
+                .hourlyRate(hourlyRate)
+                .build();
+
+        System.out.println(carInfo);
+    }
 }
