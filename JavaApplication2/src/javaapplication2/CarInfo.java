@@ -2,15 +2,14 @@ package javaapplication2;
 
 /**
  *
- * @author ahmed
+ * @author moeja
+ */
+
+/**
+ *
+ * @author moeja
  */
 public class CarInfo {
-  /*
-   * here are the properies we need.
-   * if you want to add more please make sure to update constructor and
-   * CarInfoBuilder class
-   * 
-   */
   private final int carId;
   private String carType;
   private String carBrand;
@@ -19,6 +18,7 @@ public class CarInfo {
   private String carCredentials;
   private boolean isAvailable;
   private double hourlyRate;
+  private Customer renter;
 
   private CarInfo(int carId, String carType, String carBrand, String carModel, String carColor,
       String carCredentials, boolean isAvailable, double hourlyRate) {
@@ -31,7 +31,6 @@ public class CarInfo {
     this.isAvailable = isAvailable;
     this.hourlyRate = hourlyRate;
   }
-
   // --------------------------------------------------------------------------
   // --------------------------- getter and setters ---------------------------
   // --------------------------------------------------------------------------
@@ -49,58 +48,55 @@ public class CarInfo {
     this.carType = carType;
   }
 
-  public String getCarBrand() {
-    return carBrand;
-  }
-
-  public void setCarBrand(String carBrand) {
-    this.carBrand = carBrand;
-  }
-
-  public String getCarModel() {
-    return carModel;
-  }
-
-  public void setCarModel(String carModel) {
-    this.carModel = carModel;
-  }
-
-  public String getCarColor() {
-    return carColor;
-  }
-
-  public void setCarColor(String carColor) {
-    this.carColor = carColor;
-  }
-
-  public String getCarCredentials() {
+  public String getCredentials() {
     return carCredentials;
   }
 
-  public void setCarCredentials(String carCredentials) {
+  public void setCredentials(String carCredentials) {
     this.carCredentials = carCredentials;
   }
 
-  public boolean isIsAvailable() {
-    return isAvailable;
+  public String getBrand() {
+    return carBrand;
   }
 
-  public void setIsAvailable(boolean isAvailable) {
-    this.isAvailable = isAvailable;
+  public void setBrand(String carBrand) {
+    this.carBrand = carBrand;
   }
 
-  public double getHourlyRate() {
+  public double getRentPerHour() {
     return hourlyRate;
   }
 
-  public void setHourlyRate(double hourlyRate) {
+  public void setRentPerHour(int hourlyRate) {
     this.hourlyRate = hourlyRate;
+  }
+
+  public String getModel() {
+    return carModel;
+  }
+
+  public void setModel(String carModel) {
+    this.carModel = carModel;
+  }
+
+  public boolean isAvailable() {
+    return isAvailable;
+  }
+
+  public Customer getRenter() {
+    return renter;
+    // Returns info about customer
+  }
+
+  public void setRenter(Customer renter) {
+    this.renter = renter;
+    // Assigning a car to a specific customer
   }
 
   // --------------------------------------------------------------------------
   // --------------------------------------------------------------------------
   // --------------------------------------------------------------------------
-
   /*
    * ==========================================
    * I added this class because the constructor
@@ -191,5 +187,4 @@ public class CarInfo {
         "  Available: " + (isAvailable ? "Yes" : "No") + "\n" +
         "  Hourly Rate: $" + String.format("%.2f", hourlyRate);
   }
-
 }
