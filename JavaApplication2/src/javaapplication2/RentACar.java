@@ -16,7 +16,7 @@ public class RentACar {
     public void rentCar(int carIndex, Customer customer) {
         CarInfo car = cars.get(carIndex); // Retrieving a car by it's index and assigning it to a new customer
         if (car.isAvailable()) { // Checks if car is avaialable
-            car.setAvalability(false); // Set's car to flase to rent it out
+            car.isAvailable(); // Set's car to flase to rent it out
             car.setRenter(customer); // assign customer
             System.out.println("Car rented successfully!");
         } else {
