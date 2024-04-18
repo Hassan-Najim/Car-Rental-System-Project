@@ -31,3 +31,4 @@ replay_pid*
 # this is for git to ignore vscode files
 tempCodeRunnerFile.java
 .vscode
+/JavaApplication2/dist/
