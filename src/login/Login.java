@@ -4,7 +4,12 @@
  */
 package login;
 
+import java.sql.*;
+
 public class Login {
+    Connection con = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
 public static void main(String[] args) {
 
          java.awt.EventQueue.invokeLater(new Runnable() {
@@ -16,6 +21,7 @@ public static void main(String[] args) {
     
     
 }
+
   
     
 }
