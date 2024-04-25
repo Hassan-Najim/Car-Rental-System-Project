@@ -11,25 +11,25 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.nar
 *.ear
 *.zip
 *.tar.gz
-*.rar
+# *.rar
 # *.properties
 # *.xml
 # *.mf
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
-/JavaApplication2/build/
+# /JavaApplication2/build/
 
 # ========================================
 
 # this is for git to ignore vscode files
 tempCodeRunnerFile.java
 .vscode
-/JavaApplication2/dist/
+# /JavaApplication2/dist/
 # /dist/
