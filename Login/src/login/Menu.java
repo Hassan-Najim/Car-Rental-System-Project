@@ -134,22 +134,28 @@ public class Menu extends javax.swing.JFrame  {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UpdateCar().setVisible(true);
+                
             }
+           
         });//
+         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddCustomer().setVisible(true);
+                new RentACar().setVisible(true);
             }
         });
+                 this.dispose();
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -158,6 +164,8 @@ public class Menu extends javax.swing.JFrame  {
                 new DisplayAllCustomers().setVisible(true);
             }
         });
+               this.dispose();
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
