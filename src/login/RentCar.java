@@ -295,9 +295,9 @@ public class RentCar extends javax.swing.JFrame {
 
     private void RentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarButtonActionPerformed
          try {
-        // Check if the entered customer ID exists in the Customer4 table
+        // Check if the entered customer ID exists in the Customer table
         String customerID = Customer.getText();
-        String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
+        String customerQuery = "SELECT * FROM Customer WHERE ID = ?";
         pst = con.prepareStatement(customerQuery);
         pst.setString(1, customerID);
         rs = pst.executeQuery();
