@@ -78,6 +78,11 @@ public class AddACustomer extends javax.swing.JFrame {
 
         txtCustomer.setBackground(new java.awt.Color(255, 232, 191));
         txtCustomer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        txtCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCustomerActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(255, 232, 191));
         jButton2.setText("Exit");
@@ -205,8 +210,8 @@ public class AddACustomer extends javax.swing.JFrame {
             String sql = "INSERT INTO Customer4(ID, Name, Email) VALUES(?,?,?);";
             try (PreparedStatement pst = con.prepareStatement(sql)) {
                 pst.setInt(1, nextId); // Set generated ID
-                pst.setString(2, txtCustomer.getText().trim());
-                pst.setString(3, txtEmail.getText().trim());
+                pst.setString(2, txtCustomer.getText().trim().toUpperCase());
+                pst.setString(3, txtEmail.getText().trim().toUpperCase());
                 pst.execute();
 
                 JOptionPane.showMessageDialog(null, "Registration Successful");
@@ -234,6 +239,10 @@ public class AddACustomer extends javax.swing.JFrame {
     private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
         this.dispose();
     }//GEN-LAST:event_backBtnMouseClicked
+
+    private void txtCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCustomerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCustomerActionPerformed
 
     /**
      * @param args the command line arguments
