@@ -192,7 +192,7 @@ public class AddACustomer extends javax.swing.JFrame {
 
             // Generate ID
             int nextId = 1; // Default starting ID
-            String idSql = "SELECT MAX(CAST(ID as INT)) FROM Customer4";
+            String idSql = "SELECT MAX(CAST(ID as INT)) FROM Customer";
             try (PreparedStatement pstId = con.prepareStatement(idSql); ResultSet rsId = pstId.executeQuery()) {
                 if (rsId.next() && rsId.getInt(1) != 0) {
                     nextId = rsId.getInt(1) + 1;
@@ -200,7 +200,7 @@ public class AddACustomer extends javax.swing.JFrame {
             }
 
             // Insert data
-            String sql = "INSERT INTO Customer4(ID, Name, Email) VALUES(?,?,?);";
+            String sql = "INSERT INTO Customer(ID, Name, Email) VALUES(?,?,?);";
             try (PreparedStatement pst = con.prepareStatement(sql)) {
                 pst.setInt(1, nextId);
                 pst.setString(2, txtCustomer.getText().trim());

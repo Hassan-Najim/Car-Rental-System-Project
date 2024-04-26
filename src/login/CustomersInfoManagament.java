@@ -70,7 +70,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
     }
 
     protected void UpdateTable() {
-        String sql = "select * from Customer4;";
+        String sql = "select * from Customer;";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -88,11 +88,11 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
             }
         }
     }
-//    String sql = "SELECT * FROM Customer4 WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
+//    String sql = "SELECT * FROM Customer WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
 
     public void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-        String sql = "SELECT * FROM Customer4 WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
+        String sql = "SELECT * FROM Customer WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
         try {
             pst = con.prepareStatement(sql);
             // Using % around the search text to find any matching part.
@@ -121,7 +121,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
     }
 
     public void updatecombo() {
-        String sql = "select * from Customer4";
+        String sql = "select * from Customer";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -368,7 +368,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
 
         if (choice == JOptionPane.OK_OPTION) {
             // User confirmed deletion, delete the entry from the database
-            String deleteQuery = "DELETE FROM Customer4 WHERE ID = ?";
+            String deleteQuery = "DELETE FROM Customer WHERE ID = ?";
             try (PreparedStatement pst = con.prepareStatement(deleteQuery)) {
                 pst.setString(1, id);
                 int rowsAffected = pst.executeUpdate();

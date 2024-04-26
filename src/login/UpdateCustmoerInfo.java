@@ -100,7 +100,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
     }
 
     public void updatecombo() {
-        String sql = "select * from Customer4";
+        String sql = "select * from Customer";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -113,7 +113,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
     }
 
     protected void UpdateTable() {
-        String sql = "select * from Customer4;";
+        String sql = "select * from Customer;";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -134,7 +134,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     public void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-        String sql = "SELECT * FROM Customer4 WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
+        String sql = "SELECT * FROM Customer WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
         try {
             pst = con.prepareStatement(sql);
             // Using % around the search text to find any matching part.
@@ -407,7 +407,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
                     return;
                 }
 
-                String sql = "UPDATE Customer4 SET Name = ?, Email = ? WHERE ID = ?;";
+                String sql = "UPDATE Customer SET Name = ?, Email = ? WHERE ID = ?;";
                 try (PreparedStatement pst = con.prepareStatement(sql)) {
                     pst.setString(1, name);
                     pst.setString(2, email);
