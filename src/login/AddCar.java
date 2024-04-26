@@ -303,7 +303,7 @@ public class AddCar extends javax.swing.JFrame {
             try {
                 rs.close();
                 pst.close();
-
+                this.dispose();
             } catch (Exception e) {
 
             }
