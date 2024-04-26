@@ -163,6 +163,16 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
         jPanel1.setPreferredSize(new java.awt.Dimension(960, 540));
+        jPanel1.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                jPanel1HierarchyChanged(evt);
+            }
+        });
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
 
         addCutmoerBttn.setBackground(new java.awt.Color(255, 232, 191));
         addCutmoerBttn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -329,28 +339,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void table5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table5MouseClicked
-        int row = table5.getSelectedRow();
-        //  String sql2 =  jj.getSelectedItem().toString();
-        String selection = table5.getModel().getValueAt(row, 0).toString();
-        String sql = "select * from Customer4 where ID = " + selection;
-        //    String selection2 = table5.getModel().getValueAt(row, 6).toString();
-        //String sql2 = "select * from Car3 where Availability =" + selection2;
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-//                ID2.setSelectedItem(rs.getString("ID"));
-//                id.setText(rs.getString("ID"));
-//                name.setText(rs.getString("Name"));
-//                email.setText(rs.getString("Email"));
-//                UpdateTable();
-//               
-
-                // JOptionPane.showMessageDialog(null, "Update Complete");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
+       
     }//GEN-LAST:event_table5MouseClicked
 
     private void addCutmoerBttnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCutmoerBttnActionPerformed
@@ -362,11 +351,37 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
     }//GEN-LAST:event_addCutmoerBttnActionPerformed
 
     private void removeAcustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeAcustomerActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RemoveACustmoer().setVisible(true);
+        int selectedRow = table5.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to delete.", "No row selected", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String id = table5.getValueAt(selectedRow, 0).toString();
+
+        String confirmationMessage = "Are you sure you want to delete the selected customer?\n\n"
+                + "ID: " + id + "\n"
+                + "This action cannot be undone.";
+
+        int choice = JOptionPane.showConfirmDialog(this, confirmationMessage, "Confirm Deletion", JOptionPane.OK_CANCEL_OPTION);
+
+        if (choice == JOptionPane.OK_OPTION) {
+            // User confirmed deletion, delete the entry from the database
+            String deleteQuery = "DELETE FROM Customer4 WHERE ID = ?";
+            try (PreparedStatement pst = con.prepareStatement(deleteQuery)) {
+                pst.setString(1, id);
+                int rowsAffected = pst.executeUpdate();
+                if (rowsAffected > 0) {
+                    JOptionPane.showMessageDialog(this, "Customer deleted successfully.", "Deletion Successful", JOptionPane.INFORMATION_MESSAGE);
+                    UpdateTable(); // Update the table after deletion
+                } else {
+                    JOptionPane.showMessageDialog(this, "No customer found with ID: " + id, "Deletion Unsuccessful", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Error deleting a customer entry: " + ex.getMessage(), "Deletion Error", JOptionPane.ERROR_MESSAGE);
             }
-        });
+        }
     }//GEN-LAST:event_removeAcustomerActionPerformed
 
     private void updateACustomerInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateACustomerInfoActionPerformed
@@ -399,6 +414,14 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
         UpdateTable();
         updatecombo();
     }//GEN-LAST:event_refreshBtnMouseClicked
+
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1FocusGained
+
+    private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1HierarchyChanged
 
     /**
      * @param args the command line arguments

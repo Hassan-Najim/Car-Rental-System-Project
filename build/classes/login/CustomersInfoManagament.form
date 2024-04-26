@@ -51,6 +51,10 @@
           <Dimension value="[960, 540]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="hierarchyChanged" listener="java.awt.event.HierarchyListener" parameters="java.awt.event.HierarchyEvent" handler="jPanel1HierarchyChanged"/>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jPanel1FocusGained"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">

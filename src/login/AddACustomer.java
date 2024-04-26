@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
  *
  * @author moeja
  */
-
 public class AddACustomer extends javax.swing.JFrame {
 
     Connection con = null;
@@ -39,7 +38,7 @@ public class AddACustomer extends javax.swing.JFrame {
 
     public AddACustomer() {
         initComponents();
-        applyHoverEffect(jButton1);
+        applyHoverEffect(addCustomer);
         applyHoverEffect(jButton2);
 
         setTitle("Register a Customer");
@@ -63,7 +62,7 @@ public class AddACustomer extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        addCustomer = new javax.swing.JButton();
         backBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -94,12 +93,12 @@ public class AddACustomer extends javax.swing.JFrame {
 
         jLabel1.setText("Customer Name:");
 
-        jButton1.setBackground(new java.awt.Color(255, 232, 191));
-        jButton1.setText("Add Customer");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addCustomer.setBackground(new java.awt.Color(255, 232, 191));
+        addCustomer.setText("Add Customer");
+        addCustomer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        addCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addCustomerActionPerformed(evt);
             }
         });
 
@@ -126,7 +125,7 @@ public class AddACustomer extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(addCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -157,7 +156,7 @@ public class AddACustomer extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -180,56 +179,57 @@ public class AddACustomer extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerActionPerformed
         try {
-            // Start a transaction
-            con.setAutoCommit(false);
-
             // Check for empty fields
             if (txtCustomer.getText().trim().isEmpty() || txtEmail.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Name and Email cannot be empty");
                 return;
             }
 
+            // Start transaction
+            con.setAutoCommit(false);
+
             // Generate ID
             int nextId = 1; // Default starting ID
             String idSql = "SELECT MAX(CAST(ID as INT)) FROM Customer4";
             try (PreparedStatement pstId = con.prepareStatement(idSql); ResultSet rsId = pstId.executeQuery()) {
                 if (rsId.next() && rsId.getInt(1) != 0) {
-                    System.out.println("from id dsfajoihsdjfo " + rsId.getInt(1));
-                    nextId = rsId.getInt(1) + 1; // Increment ID based on the highest value in the database
+                    nextId = rsId.getInt(1) + 1;
                 }
             }
 
             // Insert data
             String sql = "INSERT INTO Customer4(ID, Name, Email) VALUES(?,?,?);";
             try (PreparedStatement pst = con.prepareStatement(sql)) {
-                pst.setInt(1, nextId); // Set generated ID
+                pst.setInt(1, nextId);
                 pst.setString(2, txtCustomer.getText().trim());
                 pst.setString(3, txtEmail.getText().trim());
-                pst.execute();
-
+                pst.executeUpdate();
+                con.commit();
                 JOptionPane.showMessageDialog(null, "Registration Successful");
-
-                this.dispose();
             }
-
         } catch (Exception e) {
-            try {
-                con.rollback(); // Roll back in case of exception
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
             JOptionPane.showMessageDialog(null, "Registration Unsuccessful: " + e.getMessage());
-            e.printStackTrace(); // More detailed error printing in console
-        } finally {
-            try {
-                con.setAutoCommit(true); // Restore auto-commit mode
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if (con != null) {
+                try {
+                    con.rollback();
+                     System.out.println("Transaction rolled back.");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
+        } finally {
+           try{
+               rs.close();
+               pst.close();
+           } catch (Exception e) {
+                
+            }
+            this.dispose();
+
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addCustomerActionPerformed
 
     private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
         this.dispose();
@@ -272,8 +272,8 @@ public class AddACustomer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addCustomer;
     private javax.swing.JLabel backBtn;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
