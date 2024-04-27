@@ -4,10 +4,13 @@
  */
 package login;
 
+import java.awt.Image;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
 public class CarInfoManagement extends javax.swing.JFrame {
@@ -19,8 +22,8 @@ public class CarInfoManagement extends javax.swing.JFrame {
     public CarInfoManagement() {
         initComponents();
         con = DBConnection.ConnectionDB();
-        UpdateTable();
-        updatecombo();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
         SearchTextFieldCar.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -37,6 +40,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
                 // This is not typically called for plain text components.
             }
         });
+        UpdateTable();
     }
     
 
@@ -58,18 +62,6 @@ public class CarInfoManagement extends javax.swing.JFrame {
 
             }
         }
-    }
-
-    private void updatecombo() {
-        String sql = "select * from Car3";
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-            }
-        } catch (Exception e) {
-        }
-
     }
 
     /**
@@ -95,6 +87,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Info Managment");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
@@ -297,7 +290,16 @@ public class CarInfoManagement extends javax.swing.JFrame {
     String licensePlate = table3.getValueAt(selectedRow, 6).toString();
     String availability = table3.getValueAt(selectedRow, 7).toString();
     String hourlyRate = table3.getValueAt(selectedRow, 8).toString();
-    String customerRenter = table3.getValueAt(selectedRow, 9).toString();
+    String customerRenter = "";
+    if(table3.getValueAt(selectedRow, 9) == null)
+    {
+        customerRenter = "";
+    }
+    else
+    {
+       customerRenter = table3.getValueAt(selectedRow, 9).toString(); 
+    }
+    
     
     // Construct the confirmation message
     String confirmationMessage = "Are you sure you want to delete the following car entry?\n\n"
@@ -320,7 +322,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
     if (choice == JOptionPane.OK_OPTION) {
         // User confirmed deletion, delete the entry from the database
         String deleteQuery = "DELETE FROM Car3 WHERE ID = ?";
-        try {
+        try (PreparedStatement deleteStatemnet = con.prepareStatement(deleteQuery)) {
             pst = con.prepareStatement(deleteQuery);
             pst.setString(1, id);
             pst.executeUpdate();
@@ -329,6 +331,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error deleting car entry: " + ex.getMessage(), "Deletion Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -355,7 +358,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_table3KeyReleased
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
-        /*     int row = table3.getSelectedRow();
+        int row = table3.getSelectedRow();
         String selection = table3.getModel().getValueAt(row, 0).toString();
         String sql = "select * from Car3 where ID =" + selection;
         String selection2 = table3.getModel().getValueAt(row, 6).toString();
@@ -366,20 +369,30 @@ public class CarInfoManagement extends javax.swing.JFrame {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             if (rs.next()) {
-                Customer.setText(rs.getString("CustomerRenter"));
-                id.setText(rs.getString("ID"));
-
-                // JOptionPane.showMessageDialog(null, "Update Complete");
+                
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-        */
+        finally {
+            try {
+                // Ensure resources are closed.
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
+            
+        }
+        
     }//GEN-LAST:event_table3MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         UpdateTable();
-        updatecombo();
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

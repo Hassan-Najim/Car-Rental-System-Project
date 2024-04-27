@@ -5,9 +5,11 @@
 package login;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -42,6 +44,8 @@ public class RemoveACustmoer extends javax.swing.JFrame {
         applyHoverEffect(jButton2);
         setLocationRelativeTo(null);
         con = DBConnection.ConnectionDB();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
     }
 
     /**
@@ -62,6 +66,7 @@ public class RemoveACustmoer extends javax.swing.JFrame {
         backBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 

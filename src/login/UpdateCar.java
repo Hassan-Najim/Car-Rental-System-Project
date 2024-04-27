@@ -4,12 +4,19 @@
  */
 package login;
 
+import java.awt.Color;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
-import java.util.Set;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import net.proteanit.sql.DbUtils;
 
 /**
@@ -21,14 +28,71 @@ Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
   
+    
+    
+    private void applyHoverEffect(JButton button) {
+        Color originalColor = button.getBackground();
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(originalColor.darker());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(originalColor);
+            }
+        });
+    }
+    
+    
+    
+//     private void setUpTableListener() {
+//        table3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            public void valueChanged(ListSelectionEvent event) {
+//                if (!event.getValueIsAdjusting() && table3.getSelectedRow() != -1) {
+//                    int selectedRow = table3.getSelectedRow();
+//                    if (selectedRow >= 0) {
+//                        Object Type = table3.getModel().getValueAt(selectedRow, 1); 
+//                        Object Brand = table3.getModel().getValueAt(selectedRow, 2); 
+//                        Object Model = table3.getModel().getValueAt(selectedRow, 3); 
+//                        Object Color = table3.getModel().getValueAt(selectedRow, 4); 
+//                        Object LicensePlate = table3.getModel().getValueAt(selectedRow, 5); 
+//                        Object Availability = table3.getModel().getValueAt(selectedRow, 6); 
+//                        Object HourRate = table3.getModel().getValueAt(selectedRow, 7); 
+//                        Object CustomerRenter = table3.getModel().getValueAt(selectedRow, 8); 
+//                        
+//                        TypeField.setText(Type.toString());
+//                        BrandField.setText(Brand.toString());
+//                        ModelField.setText(Model.toString());
+//                        ColorField.setText(Color.toString());
+//                        LicensePlateField.setText(LicensePlate.toString());
+//                        AvailabilityField.getSelectedItem().toString();
+//                        HourlyRateField.setText(HourRate.toString());
+//                        CustomerField.setText(CustomerRenter.toString());
+//                        
+//                    }
+//                }
+//            }
+//        });
+//    }
+    
+    
+    
+    
     /**
      * Creates new form UpdateCar
      */
     public UpdateCar() {
         initComponents();
-         con=DBConnection.ConnectionDB();
-           UpdateTable();
-           updatecombo();
+ 
+           Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+            this.setIconImage(icon);
+            
+            applyHoverEffect(update);
+            
+            table3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            table3.setRowSelectionAllowed(true);
            
            SearchTextFieldCarUpdate.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -46,6 +110,11 @@ Connection con = null;
                 // This is not typically called for plain text components.
             }
         });
+           setLocationRelativeTo(null);
+        con = DBConnection.ConnectionDB();
+        table3.getSelectionModel().addListSelectionListener(new ListSelectionListenerImpl());
+           
+           UpdateTable();
         
            
     }
@@ -70,29 +139,7 @@ Connection con = null;
             }
         }
     }
-    private void updatecombo(){
-        String sql = "select * from Car3";
-        try {
-            pst = con.prepareStatement(sql);
-            rs=pst.executeQuery();
-            while(rs.next()){
-            }
-        } catch (Exception e) {
-        }
-        
-    }
-    private void updatecombo2(){
-        String sql = "select * from Car3";
-        try {
-            pst = con.prepareStatement(sql);
-            rs=pst.executeQuery();
-            while(rs.next()){
-                MM.addItem(rs.getString("Availability"));
-            }
-        } catch (Exception e) {
-        }
-        
-    }
+  
 
     
 
@@ -106,9 +153,9 @@ Connection con = null;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        Model = new javax.swing.JTextField();
-        LicensePlate = new javax.swing.JTextField();
-        Type = new javax.swing.JTextField();
+        ModelField = new javax.swing.JTextField();
+        LicensePlateField = new javax.swing.JTextField();
+        TypeField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         update = new javax.swing.JButton();
@@ -119,33 +166,35 @@ Connection con = null;
         jLabel9 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        Customer = new javax.swing.JTextField();
+        CustomerField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        Brand = new javax.swing.JTextField();
-        ManuYear = new javax.swing.JTextField();
-        MM = new javax.swing.JComboBox<>();
-        HourlyRate = new javax.swing.JTextField();
-        Color = new javax.swing.JTextField();
+        BrandField = new javax.swing.JTextField();
+        ManuYearField = new javax.swing.JTextField();
+        AvailabilityField = new javax.swing.JComboBox<>();
+        HourlyRateField = new javax.swing.JTextField();
+        ColorField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         SearchTextFieldCarUpdate = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        Model.addActionListener(new java.awt.event.ActionListener() {
+        ModelField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModelActionPerformed(evt);
+                ModelFieldActionPerformed(evt);
             }
         });
 
-        Type.addActionListener(new java.awt.event.ActionListener() {
+        TypeField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TypeActionPerformed(evt);
+                TypeFieldActionPerformed(evt);
             }
         });
 
@@ -195,6 +244,11 @@ Connection con = null;
                 table3KeyReleased(evt);
             }
         });
+        table3.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                table3VetoableChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(table3);
 
         jLabel9.setText("Current Renter:");
@@ -205,16 +259,16 @@ Connection con = null;
 
         jLabel6.setText("License Plate#: ");
 
-        ManuYear.addActionListener(new java.awt.event.ActionListener() {
+        ManuYearField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManuYearActionPerformed(evt);
+                ManuYearFieldActionPerformed(evt);
             }
         });
 
-        MM.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
-        MM.addActionListener(new java.awt.event.ActionListener() {
+        AvailabilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
+        AvailabilityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MMActionPerformed(evt);
+                AvailabilityFieldActionPerformed(evt);
             }
         });
 
@@ -247,22 +301,31 @@ Connection con = null;
             }
         });
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel12)
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SearchTextFieldCarUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12)
+                            .addGap(26, 26, 26)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(SearchTextFieldCarUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(backBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,11 +333,11 @@ Connection con = null;
                         .addGap(13, 13, 13)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TypeField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(Brand, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BrandField, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -282,26 +345,26 @@ Connection con = null;
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(30, 30, 30)
-                                .addComponent(Model)
+                                .addComponent(ModelField)
                                 .addGap(21, 21, 21)
                                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(ManuYear, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ManuYearField, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(73, 73, 73))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(18, 18, 18)
-                                        .addComponent(LicensePlate, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(LicensePlateField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel8)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(HourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(HourlyRateField, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(24, 24, 24)
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Customer, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(CustomerField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -311,17 +374,19 @@ Connection con = null;
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(24, 24, 24)
-                                        .addComponent(Color, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(ColorField, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(MM, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(AvailabilityField, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(84, 84, 84))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addContainerGap()
+                .addComponent(backBtn)
+                .addGap(43, 43, 43)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -335,32 +400,32 @@ Connection con = null;
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Type, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TypeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(Brand, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BrandField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(Model, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ModelField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10)
-                            .addComponent(ManuYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ManuYearField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(Color, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ColorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AvailabilityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(LicensePlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LicensePlateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(HourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(HourlyRateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)
-                            .addComponent(Customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CustomerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(74, 74, 74)
                         .addComponent(update)
                         .addGap(9, 9, 9)))
@@ -387,8 +452,29 @@ Connection con = null;
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
 
-        try {
-           
+        int selectedRow = table3.getSelectedRow();
+        if (selectedRow >= 0) {
+            try {
+                String id = table3.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
+                String Type = TypeField.getText().trim().toUpperCase(); 
+                String Brand = BrandField.getText().trim().toUpperCase(); 
+                String Model = ModelField.getText().trim().toUpperCase();
+                String ManfactureYear = ManuYearField.getText().trim().toUpperCase();
+                String Color = ColorField.getText().trim().toUpperCase(); 
+                String LicensePlate = LicensePlateField.getText().trim().toUpperCase();
+                String Availability = AvailabilityField.getSelectedItem().toString().trim().toUpperCase(); 
+                String HourRate = HourlyRateField.getText().trim().toUpperCase(); 
+                String CustomerRenter = CustomerField.getText().trim().toUpperCase();
+
+                        if (id.isEmpty() || Type.isEmpty()
+                        || Brand.isEmpty()|| Model.isEmpty()
+                        || ManfactureYear.isEmpty()|| Color.isEmpty()
+                        || LicensePlate.isEmpty()|| Availability.isEmpty()
+                        || HourRate.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Name and Email cannot be empty");
+                    return;
+                }
+
                 String sql = "UPDATE Car3 SET "
                + "Type = ?, "
                + "Brand = ?, "
@@ -400,46 +486,131 @@ Connection con = null;
                + "HourlyRate = ?, "
                + "CustomerRenter = ? "
                + "WHERE ID = ?";
-    
-    pst = con.prepareStatement(sql);
-    pst.setString(1, Type.getText());
-    pst.setString(2, Brand.getText());
-    pst.setString(3, Model.getText());
-    pst.setString(4, ManuYear.getText());
-    pst.setString(5, Color.getText());
-    pst.setString(6, LicensePlate.getText());
-    pst.setString(7, MM.getSelectedItem().toString());
-    pst.setString(8, HourlyRate.getText());
-    pst.setString(9, Customer.getText());
-            System.out.println(rs.getString("ID"));
-    pst.setString(10, table3.getModel().getValueAt(table3.getSelectedRow(), 0).toString() );
-           
-    
-    pst.executeUpdate();
-    UpdateTable();
-    JOptionPane.showMessageDialog(null, "Record Updated successfully");
-} catch (SQLException e) {
-    JOptionPane.showMessageDialog(null, e.getMessage());
-} 
-       finally{
-            try{
-            rs.close();
-            pst.close();
-            
-        }
-            catch(Exception e){
-                
+                try (PreparedStatement pst = con.prepareStatement(sql)) {
+                     pst.setString(1, TypeField.getText());
+                     pst.setString(2, BrandField.getText());
+                     pst.setString(3, ModelField.getText());
+                     pst.setString(4, ManuYearField.getText());
+                     pst.setString(5, ColorField.getText());
+                     pst.setString(6, LicensePlateField.getText());
+                     pst.setString(7, AvailabilityField.getSelectedItem().toString());
+                     pst.setString(8, HourlyRateField.getText());
+                     pst.setString(9, CustomerField.getText());
+                     System.out.println(rs.getString("ID"));
+                     pst.setString(10, table3.getModel().getValueAt(table3.getSelectedRow(), 0).toString() );
+
+                    int affectedRows = pst.executeUpdate();
+                    if (affectedRows > 0) {
+                        JOptionPane.showMessageDialog(null, "Update Successful");
+                        UpdateTable();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Update Failed");
+                    }
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
+            }finally {
+            try {
+                rs.close();
+                pst.close();
+
+            } catch (Exception e) {
+
             }
         }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+//        try {
+//           
+//                String sql = "UPDATE Car3 SET "
+//               + "Type = ?, "
+//               + "Brand = ?, "
+//               + "Model = ?, " 
+//               + "ManufactureYear = ?,"
+//               + "Color = ?, "
+//               + "LicensePlate = ?, "
+//               + "Availability = ?, "
+//               + "HourlyRate = ?, "
+//               + "CustomerRenter = ? "
+//               + "WHERE ID = ?";
+//    
+//    pst = con.prepareStatement(sql);
+//    pst.setString(1, TypeField.getText());
+//    pst.setString(2, BrandField.getText());
+//    pst.setString(3, ModelField.getText());
+//    pst.setString(4, ManuYearField.getText());
+//    pst.setString(5, ColorField.getText());
+//    pst.setString(6, LicensePlateField.getText());
+//    pst.setString(7, AvailabilityField.getSelectedItem().toString());
+//    pst.setString(8, HourlyRateField.getText());
+//    pst.setString(9, CustomerField.getText());
+//            System.out.println(rs.getString("ID"));
+//    pst.setString(10, table3.getModel().getValueAt(table3.getSelectedRow(), 0).toString() );
+//           
+//    
+//    pst.executeUpdate();
+//    UpdateTable();
+//    JOptionPane.showMessageDialog(null, "Record Updated successfully");
+//} catch (SQLException e) {
+//    JOptionPane.showMessageDialog(null, e.getMessage());
+//} 
+//       finally{
+//            try{
+//            rs.close();
+//            pst.close();
+//            
+//        }
+//            catch(Exception e){
+//                
+//            }
+//        }
 
 
   
        
     }//GEN-LAST:event_updateActionPerformed
 
-    private void TypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeActionPerformed
+    private void TypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_TypeActionPerformed
+    }//GEN-LAST:event_TypeFieldActionPerformed
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
 
@@ -447,30 +618,29 @@ Connection con = null;
     //  String sql2 =  jj.getSelectedItem().toString();
      String selection = table3.getModel().getValueAt(row, 0).toString();
      String sql = "select * from Car3 where ID =" + selection;
-       String selection2 = table3.getModel().getValueAt(row, 6).toString();
-     String sql2 = "select * from Car3 where Availability =" + selection2;
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
             if(rs.next()){
-                Type.setText(rs.getString("Type"));
-                Brand.setText(rs.getString("Brand"));
-                Model.setText(rs.getString("Model"));
-                ManuYear.setText(rs.getString("ManufactureYear"));
-                Color.setText(rs.getString("Color"));
-                LicensePlate.setText(rs.getString("LicensePlate"));
-                MM.setSelectedItem(rs.getString("Availability"));
-                MM.setSelectedItem(rs.getString("Availability"));;
-                HourlyRate.setText(rs.getString("HourlyRate"));
-                Customer.setText(rs.getString("CustomerRenter"));
+                TypeField.setText(rs.getString("Type"));
+                BrandField.setText(rs.getString("Brand"));
+                ModelField.setText(rs.getString("Model"));
+                ManuYearField.setText(rs.getString("ManufactureYear"));
+                ColorField.setText(rs.getString("Color"));
+                LicensePlateField.setText(rs.getString("LicensePlate"));
+                AvailabilityField.setSelectedItem(rs.getString("Availability"));
+                AvailabilityField.setSelectedItem(rs.getString("Availability"));;
+                HourlyRateField.setText(rs.getString("HourlyRate"));
+                CustomerField.setText(rs.getString("CustomerRenter"));
                
              // JOptionPane.showMessageDialog(null, "Update Complete");
 
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
+        
      
     }//GEN-LAST:event_table3MouseClicked
 
@@ -479,22 +649,29 @@ Connection con = null;
      
     }//GEN-LAST:event_table3KeyReleased
 
-    private void ManuYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuYearActionPerformed
+    private void ManuYearFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuYearFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ManuYearActionPerformed
+    }//GEN-LAST:event_ManuYearFieldActionPerformed
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         UpdateTable();
-        updatecombo();
     }//GEN-LAST:event_jLabel12MouseClicked
 
-    private void ModelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelActionPerformed
+    private void ModelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ModelActionPerformed
+    }//GEN-LAST:event_ModelFieldActionPerformed
 
-    private void MMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MMActionPerformed
+    private void AvailabilityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvailabilityFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MMActionPerformed
+    }//GEN-LAST:event_AvailabilityFieldActionPerformed
+
+    private void table3VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_table3VetoableChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table3VetoableChange
+
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_backBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -532,16 +709,17 @@ Connection con = null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Brand;
-    private javax.swing.JTextField Color;
-    private javax.swing.JTextField Customer;
-    private javax.swing.JTextField HourlyRate;
-    private javax.swing.JTextField LicensePlate;
-    private javax.swing.JComboBox<String> MM;
-    private javax.swing.JTextField ManuYear;
-    private javax.swing.JTextField Model;
+    private javax.swing.JComboBox<String> AvailabilityField;
+    private javax.swing.JTextField BrandField;
+    private javax.swing.JTextField ColorField;
+    private javax.swing.JTextField CustomerField;
+    private javax.swing.JTextField HourlyRateField;
+    private javax.swing.JTextField LicensePlateField;
+    private javax.swing.JTextField ManuYearField;
+    private javax.swing.JTextField ModelField;
     private javax.swing.JTextField SearchTextFieldCarUpdate;
-    private javax.swing.JTextField Type;
+    private javax.swing.JTextField TypeField;
+    private javax.swing.JLabel backBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -605,6 +783,39 @@ Connection con = null;
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
+        }
+    }
+
+    private class ListSelectionListenerImpl implements ListSelectionListener {
+
+        public ListSelectionListenerImpl() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent evt) {
+            if (!evt.getValueIsAdjusting()) {
+                int selectedRow = table3.getSelectedRow();
+                if (selectedRow != -1) {
+                    Object Type = table3.getValueAt(selectedRow, 1);
+                    Object Brand = table3.getValueAt(selectedRow, 2);
+                    Object Model = table3.getValueAt(selectedRow, 3);
+                    Object ManfactureYear = table3.getValueAt(selectedRow, 4);
+                    Object Color = table3.getValueAt(selectedRow, 5);
+                    Object LicensePlate = table3.getValueAt(selectedRow, 6);
+                    Object Availability = table3.getValueAt(selectedRow, 7);
+                    Object HourRate = table3.getValueAt(selectedRow, 8);
+                    Object CustomerRenter = table3.getValueAt(selectedRow, 9);
+                    TypeField.setText(Type.toString());
+                    BrandField.setText(Brand.toString());
+                    ModelField.setText(Model.toString());
+                    ManuYearField.setText(ManfactureYear.toString());
+                    ColorField.setText(Color.toString());
+                    LicensePlateField.setText(LicensePlate.toString());
+                    AvailabilityField.getSelectedItem().toString();
+                    HourlyRateField.setText(HourRate.toString());
+                    CustomerField.setText(CustomerRenter.toString());
+                }
             }
         }
     }

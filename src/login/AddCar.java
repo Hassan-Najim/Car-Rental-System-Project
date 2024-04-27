@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package login;
+import java.awt.Image;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +25,8 @@ public class AddCar extends javax.swing.JFrame {
         con=DBConnection.ConnectionDB();
         originalText = jLabel6.getText();
         Update();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
     }
    
     
@@ -32,9 +36,16 @@ public class AddCar extends javax.swing.JFrame {
             pst = con.prepareStatement(sql);
             rs= pst.executeQuery();
             while(rs.next()){
-   //             Ava.addItem(rs.getString("Availability"));
             }
         } catch (Exception e) {
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+
+            } catch (Exception e) {
+
+            }
         }
     }
 
@@ -67,6 +78,7 @@ public class AddCar extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Add Car");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
@@ -254,51 +266,55 @@ public class AddCar extends javax.swing.JFrame {
     }//GEN-LAST:event_ColorActionPerformed
 
     private void AddCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCarActionPerformed
-        int nextID = 1; // Default starting ID
-        String idSql = "SELECT MAX(CAST(ID AS INT)) FROM Car3";
-        try (PreparedStatement pstId = con.prepareStatement(idSql);
-        ResultSet rsId = pstId.executeQuery())
-        {
-            if (rsId.next() && rsId.getInt(1) != 0) {
+        // Check if any text field is empty
+    if (Type.getText().isEmpty() || Brand.getText().isEmpty() || Model.getText().isEmpty() ||
+        ManfactureYear.getText().isEmpty() || Color.getText().isEmpty() || LicensePlate.getText().isEmpty() ||
+        HourlyRate.getText().isEmpty()) {
+        // Display error message if any field is empty
+        JOptionPane.showMessageDialog(null, "All fields must be filled.", "Error", JOptionPane.ERROR_MESSAGE);
+        return; // Exit the method without adding the car to the database
+    }
+    
+    int nextID = 1; // Default starting ID
+    String idSql = "SELECT MAX(CAST(ID AS INT)) FROM Car3";
+    try (PreparedStatement pstId = con.prepareStatement(idSql);ResultSet rsId = pstId.executeQuery())
+    {
+        if (rsId.next() && rsId.getInt(1) != 0) {
             System.out.println("from id " + rsId.getInt(1));
             nextID = rsId.getInt(1) + 1; // Increment ID based on the highest value in the database
+        }
+    } catch (SQLException ex) { 
+        Logger.getLogger(AddCar.class.getName()).log(Level.SEVERE, null, ex);
     }
-}       catch (SQLException ex) { 
-            Logger.getLogger(AddCar.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-        try{
-            String sql = "INSERT INTO Car3 VALUES(?,?,?,?,?,?,?,?,?,?); ";
-            pst = con.prepareStatement(sql);
-            pst.setInt(1, nextID);
-            pst.setString(2,Type.getText());
-            pst.setString(3,Brand.getText());
-            pst.setString(4,Model.getText());
-            pst.setString(5,ManfactureYear.getText());
-            pst.setString(6, Color.getText());
-            pst.setString(7,LicensePlate.getText());
-            pst.setString(8, "Avialable");
-            pst.setString(9, HourlyRate.getText());
-            pst.setString(10, null);
-            
-            pst.execute();
-            System.out.println("Registration Successfull");
-            JOptionPane.showMessageDialog(null, "Car Successfully Added");
+    try {
+        String sql = "INSERT INTO Car3 VALUES(?,?,?,?,?,?,?,?,?,?); ";
+        pst = con.prepareStatement(sql);
+        pst.setInt(1, nextID);
+        pst.setString(2, Type.getText().toUpperCase());
+        pst.setString(3, Brand.getText().toUpperCase());
+        pst.setString(4, Model.getText().toUpperCase());
+        pst.setString(5, ManfactureYear.getText());
+        pst.setString(6, Color.getText().toUpperCase());
+        pst.setString(7, LicensePlate.getText().toUpperCase());
+        pst.setString(8, "Avialable");
+        pst.setString(9, HourlyRate.getText().toUpperCase());
+        pst.setString(10, null);
+        
+        pst.execute();
+        System.out.println("Registration Successful");
+        JOptionPane.showMessageDialog(null, "Car Successfully Added");
+    } catch(Exception e) {
+        System.out.println("Registration Unsuccessful" + e);
+        JOptionPane.showMessageDialog(null, "Error");
+    } finally {
+        try {
+            rs.close();
+            pst.close();
+        } catch(Exception e) {
+            // Handle exception
         }
-        catch(Exception e){
-            System.out.println("Registration UnSuccessfull" + e);
-            JOptionPane.showMessageDialog(null, "Error");
-        }
-        finally{
-            try{
-                rs.close();
-                pst.close();
-
-            }
-            catch(Exception e){
-
-            }
-        }
+    }
 
     }//GEN-LAST:event_AddCarActionPerformed
 

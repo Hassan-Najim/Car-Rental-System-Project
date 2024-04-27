@@ -5,9 +5,11 @@
 package login;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -40,6 +42,8 @@ public class Registration extends javax.swing.JFrame {
         initComponents();
         applyHoverEffect(btnRegister);
         applyHoverEffect(jButton1);
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
 
         con = DBConnection.ConnectionDB();
     }
@@ -64,6 +68,7 @@ public class Registration extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(99, 63, 42));
         jPanel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -73,7 +78,6 @@ public class Registration extends javax.swing.JFrame {
 
         txtUserRegister.setBackground(new java.awt.Color(255, 232, 191));
         txtUserRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        txtUserRegister.setPreferredSize(new java.awt.Dimension(64, 20));
         txtUserRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUserRegisterActionPerformed(evt);
@@ -91,7 +95,6 @@ public class Registration extends javax.swing.JFrame {
 
         txtPassRegister.setBackground(new java.awt.Color(255, 232, 191));
         txtPassRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        txtPassRegister.setPreferredSize(new java.awt.Dimension(64, 20));
 
         jButton1.setBackground(new java.awt.Color(255, 232, 191));
         jButton1.setText("Exit");

@@ -5,6 +5,7 @@
 package login;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
@@ -42,6 +43,8 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
 
     public CustomersInfoManagament() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
         applyHoverEffect(addCutmoerBttn);
         applyHoverEffect(removeAcustomer);
         applyHoverEffect(updateACustomerInfo);
@@ -157,6 +160,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
         refreshBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Rental System");
         setBackground(new java.awt.Color(244, 235, 218));
         setMinimumSize(new java.awt.Dimension(960, 540));
         setSize(new java.awt.Dimension(960, 540));

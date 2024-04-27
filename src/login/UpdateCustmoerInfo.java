@@ -5,9 +5,11 @@
 package login;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -60,6 +62,8 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     public UpdateCustmoerInfo() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
         applyHoverEffect(UpdateBtn);
         table5.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table5.setRowSelectionAllowed(true);
@@ -96,21 +100,9 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
             }
         });
         UpdateTable();
-        updatecombo();
     }
 
-    public void updatecombo() {
-        String sql = "select * from Customer4";
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-//                ID2.addItem(rs.getString("ID"));
-            }
-        } catch (Exception e) {
-        }
-
-    }
+   
 
     protected void UpdateTable() {
         String sql = "select * from Customer4;";
@@ -187,10 +179,11 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         UpdateBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(99, 63, 42));
         jLabel2.setText("Update Customer Info");
 
@@ -380,7 +373,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         UpdateTable();
-        updatecombo();
+
     }//GEN-LAST:event_refreshBtnMouseClicked
 
     private void table5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table5MouseClicked
@@ -397,8 +390,8 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         if (selectedRow >= 0) {
             try {
                 String id = table5.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
-                String name = NameToBeInserted.getText().trim();
-                String email = EmailToBeInserted.getText().trim();
+                String name = NameToBeInserted.getText().trim().toUpperCase();
+                String email = EmailToBeInserted.getText().trim().toUpperCase();
 
                 if (name.isEmpty() || email.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Name and Email cannot be empty");
@@ -415,7 +408,6 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
                     if (affectedRows > 0) {
                         JOptionPane.showMessageDialog(null, "Update Successful");
                         UpdateTable();
-                        updatecombo();
                     } else {
                         JOptionPane.showMessageDialog(null, "Update Failed");
                     }

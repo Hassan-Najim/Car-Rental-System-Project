@@ -4,7 +4,9 @@
  */
 package login;
 
+import java.awt.Image;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -21,6 +23,8 @@ public class RentCar extends javax.swing.JFrame {
         con = DBConnection.ConnectionDB();
         UpdateTable();
         updatecombo();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
         SearchTextFieldCar.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -41,9 +45,10 @@ public class RentCar extends javax.swing.JFrame {
     
 
     private void UpdateTable() {
-        String sql = "select * from Car3;";
+        String sql = "select * from Car3 where Availability = ? ;";
         try {
             pst = con.prepareStatement(sql);
+            pst.setString(1, "Available");
             rs = pst.executeQuery();
             table3.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -61,9 +66,10 @@ public class RentCar extends javax.swing.JFrame {
     }
 
     private void updatecombo() {
-        String sql = "select * from Car3";
+        String sql = "select * from Car3 where Availability = ? ;";
         try {
             pst = con.prepareStatement(sql);
+            pst.setString(1, "Available");
             rs = pst.executeQuery();
             while (rs.next()) {
             }
@@ -97,6 +103,7 @@ public class RentCar extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
@@ -292,19 +299,21 @@ public class RentCar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void RentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarButtonActionPerformed
-         try {
+        try {
         // Check if the entered customer ID exists in the Customer4 table
         String customerID = Customer.getText();
         String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
         pst = con.prepareStatement(customerQuery);
         pst.setString(1, customerID);
         rs = pst.executeQuery();
-        
+
         // If the customer ID exists, proceed to update the Car3 table
         if (rs.next()) {
             String carID = id.getText();
             String customerName = rs.getString("ID");
-            String updateSql = "UPDATE Car3 SET CustomerRenter = ? WHERE ID = ?";
+            
+            // Update the Car3 table to assign the car to the customer
+            String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = NULL WHERE ID = ?";
             pst = con.prepareStatement(updateSql);
             pst.setString(1, customerName);
             pst.setString(2, carID);
@@ -429,47 +438,40 @@ public class RentCar extends javax.swing.JFrame {
 
     private void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-        String sql = "SELECT * FROM Car3 WHERE ID LIKE ?"
-                + " OR Type LIKE ?"
-                + " OR Brand LIKE ?"
-                + " OR Model LIKE ?"
-                + " OR ManufactureYear LIKE ?"
-                + " OR Color LIKE ?"
-                + " OR LicensePlate LIKE ?"
-                + " OR Availability LIKE ?"
-                + " OR HourlyRate LIKE ?"
-                + " OR CustomerRenter LIKE ?;";
+    String sql = "SELECT * FROM Car3 WHERE (ID LIKE ?"
+            + " OR Type LIKE ?"
+            + " OR Brand LIKE ?"
+            + " OR Model LIKE ?"
+            + " OR ManufactureYear LIKE ?"
+            + " OR Color LIKE ?"
+            + " OR LicensePlate LIKE ?"
+            + " OR HourlyRate LIKE ?"
+            + " OR CustomerRenter LIKE ?)"
+            + " AND Availability = 'Available';";
+    try {
+        pst = con.prepareStatement(sql);
+        // Using % around the search text to find any matching part.
+        for (int i = 1; i <= 9; i++) {
+            pst.setString(i, "%" + toSearch + "%");
+        }
+        rs = pst.executeQuery();
+        // Set the table model using DbUtils; this handles empty result sets as well.
+        table3.setModel(DbUtils.resultSetToTableModel(rs));
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
+    } finally {
         try {
-            pst = con.prepareStatement(sql);
-            // Using % around the search text to find any matching part.
-            pst.setString(1, "%" + toSearch + "%");
-            pst.setString(2, "%" + toSearch + "%");
-            pst.setString(3, "%" + toSearch + "%");
-            pst.setString(4, "%" + toSearch + "%");
-            pst.setString(5, "%" + toSearch + "%");
-            pst.setString(6, "%" + toSearch + "%");
-            pst.setString(7, "%" + toSearch + "%");
-            pst.setString(8, "%" + toSearch + "%");
-            pst.setString(9, "%" + toSearch + "%");
-            pst.setString(10, "%" + toSearch + "%");
-            rs = pst.executeQuery();
-            // Set the table model using DbUtils; this handles empty result sets as well.
-            table3.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
-        } finally {
-            try {
-                // Ensure resources are closed.
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            // Ensure resources are closed.
+            if (rs != null) {
+                rs.close();
             }
+            if (pst != null) {
+                pst.close();
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
         }
     }
+}
 
 }
