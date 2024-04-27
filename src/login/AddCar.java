@@ -304,6 +304,7 @@ public class AddCar extends javax.swing.JFrame {
                 rs.close();
                 pst.close();
                 this.dispose();
+                System.out.println("Added a car and closed");
             } catch (Exception e) {
 
             }
