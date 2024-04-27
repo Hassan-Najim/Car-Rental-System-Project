@@ -4,9 +4,13 @@
  */
 package login;
 
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -18,12 +22,31 @@ public class CarInfoManagement extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    
+    private void applyHoverEffect(JButton button) {
+        Color originalColor = button.getBackground();
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(originalColor.darker());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(originalColor);
+            }
+        });
+    }
 
     public CarInfoManagement() {
         initComponents();
-        con = DBConnection.ConnectionDB();
         Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
-        this.setIconImage(icon);
+            this.setIconImage(icon);
+            
+            applyHoverEffect(AddCarbutton);
+            applyHoverEffect(RemoveCarButton);
+            applyHoverEffect(UpdateCarButton); 
+        
         SearchTextFieldCar.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -40,6 +63,9 @@ public class CarInfoManagement extends javax.swing.JFrame {
                 // This is not typically called for plain text components.
             }
         });
+        setTitle("Customer Management");
+        setLocationRelativeTo(null);
+        con = DBConnection.ConnectionDB();
         UpdateTable();
     }
     
@@ -77,13 +103,13 @@ public class CarInfoManagement extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         table3 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         SearchTextFieldCar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        UpdateCarButton = new javax.swing.JButton();
+        AddCarbutton = new javax.swing.JButton();
+        RemoveCarButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -128,12 +154,12 @@ public class CarInfoManagement extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(97, 60, 42));
         jLabel1.setText("All Cars Table");
 
-        jButton2.setBackground(new java.awt.Color(244, 235, 218));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Desktop\\Database\\Login\\Images\\back button.png")); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setBackground(new java.awt.Color(244, 235, 218));
+        BackButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Desktop\\Database\\Login\\Images\\back button.png")); // NOI18N
+        BackButton.setBorderPainted(false);
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
 
@@ -160,33 +186,33 @@ public class CarInfoManagement extends javax.swing.JFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Desktop\\Database\\Login\\Images\\Search Icon.png")); // NOI18N
         jLabel2.setText("  Search Bar");
 
-        jButton1.setBackground(new java.awt.Color(255, 232, 191));
-        jButton1.setText("Update Car Info");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton1.setPreferredSize(new java.awt.Dimension(103, 51));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        UpdateCarButton.setBackground(new java.awt.Color(255, 232, 191));
+        UpdateCarButton.setText("Update Car Info");
+        UpdateCarButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        UpdateCarButton.setPreferredSize(new java.awt.Dimension(103, 51));
+        UpdateCarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                UpdateCarButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 232, 191));
-        jButton3.setText("Add Car");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton3.setPreferredSize(new java.awt.Dimension(103, 51));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        AddCarbutton.setBackground(new java.awt.Color(255, 232, 191));
+        AddCarbutton.setText("Add Car");
+        AddCarbutton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        AddCarbutton.setPreferredSize(new java.awt.Dimension(103, 51));
+        AddCarbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                AddCarbuttonActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(255, 232, 191));
-        jButton4.setText("Remove Car");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton4.setPreferredSize(new java.awt.Dimension(103, 51));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        RemoveCarButton.setBackground(new java.awt.Color(255, 232, 191));
+        RemoveCarButton.setText("Remove Car");
+        RemoveCarButton.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        RemoveCarButton.setPreferredSize(new java.awt.Dimension(103, 51));
+        RemoveCarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                RemoveCarButtonActionPerformed(evt);
             }
         });
 
@@ -207,7 +233,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(BackButton))
                         .addGap(16, 16, 16))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
@@ -222,16 +248,16 @@ public class CarInfoManagement extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AddCarbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RemoveCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(UpdateCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,11 +273,11 @@ public class CarInfoManagement extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AddCarbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RemoveCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(UpdateCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(116, 116, 116))
         );
 
@@ -270,7 +296,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void RemoveCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveCarButtonActionPerformed
         // Get the selected row index
     int selectedRow = table3.getSelectedRow();
     
@@ -333,17 +359,17 @@ public class CarInfoManagement extends javax.swing.JFrame {
         }
         
     }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_RemoveCarButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void AddCarbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCarbuttonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddCar().setVisible(true);
             }
         });
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_AddCarbuttonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
@@ -351,43 +377,43 @@ public class CarInfoManagement extends javax.swing.JFrame {
 
         });
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_BackButtonActionPerformed
 
     private void table3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_table3KeyReleased
 
     }//GEN-LAST:event_table3KeyReleased
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
-        int row = table3.getSelectedRow();
-        String selection = table3.getModel().getValueAt(row, 0).toString();
-        String sql = "select * from Car3 where ID =" + selection;
-        String selection2 = table3.getModel().getValueAt(row, 6).toString();
-        String sql2 = "select * from Car3 where Availability =" + selection2;
-
-        //
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        finally {
-            try {
-                // Ensure resources are closed.
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
-            }
-            
-        }
+//        int row = table3.getSelectedRow();
+//        String selection = table3.getModel().getValueAt(row, 0).toString();
+//        String sql = "select * from Car3 where ID =" + selection;
+//        String selection2 = table3.getModel().getValueAt(row, 6).toString();
+//        String sql2 = "select * from Car3 where Availability =" + selection2;
+//
+//        //
+//        try {
+//            pst = con.prepareStatement(sql);
+//            rs = pst.executeQuery();
+//            if (rs.next()) {
+//                
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, e);
+//        }
+//        finally {
+//            try {
+//                // Ensure resources are closed.
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (pst != null) {
+//                    pst.close();
+//                }
+//            } catch (Exception e) {
+//                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+//            }
+//            
+//        }
         
     }//GEN-LAST:event_table3MouseClicked
 
@@ -395,13 +421,13 @@ public class CarInfoManagement extends javax.swing.JFrame {
         UpdateTable();
     }//GEN-LAST:event_jLabel3MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void UpdateCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateCarButtonActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UpdateCar().setVisible(true);
             }
         });
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_UpdateCarButtonActionPerformed
 
     private void SearchTextFieldCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchTextFieldCarActionPerformed
         // TODO add your handling code here:
@@ -444,11 +470,11 @@ public class CarInfoManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddCarbutton;
+    private javax.swing.JButton BackButton;
+    private javax.swing.JButton RemoveCarButton;
     private javax.swing.JTextField SearchTextFieldCar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton UpdateCarButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

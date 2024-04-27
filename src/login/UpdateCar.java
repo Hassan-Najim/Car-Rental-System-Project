@@ -44,42 +44,6 @@ Connection con = null;
             }
         });
     }
-    
-    
-    
-//     private void setUpTableListener() {
-//        table3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            public void valueChanged(ListSelectionEvent event) {
-//                if (!event.getValueIsAdjusting() && table3.getSelectedRow() != -1) {
-//                    int selectedRow = table3.getSelectedRow();
-//                    if (selectedRow >= 0) {
-//                        Object Type = table3.getModel().getValueAt(selectedRow, 1); 
-//                        Object Brand = table3.getModel().getValueAt(selectedRow, 2); 
-//                        Object Model = table3.getModel().getValueAt(selectedRow, 3); 
-//                        Object Color = table3.getModel().getValueAt(selectedRow, 4); 
-//                        Object LicensePlate = table3.getModel().getValueAt(selectedRow, 5); 
-//                        Object Availability = table3.getModel().getValueAt(selectedRow, 6); 
-//                        Object HourRate = table3.getModel().getValueAt(selectedRow, 7); 
-//                        Object CustomerRenter = table3.getModel().getValueAt(selectedRow, 8); 
-//                        
-//                        TypeField.setText(Type.toString());
-//                        BrandField.setText(Brand.toString());
-//                        ModelField.setText(Model.toString());
-//                        ColorField.setText(Color.toString());
-//                        LicensePlateField.setText(LicensePlate.toString());
-//                        AvailabilityField.getSelectedItem().toString();
-//                        HourlyRateField.setText(HourRate.toString());
-//                        CustomerField.setText(CustomerRenter.toString());
-//                        
-//                    }
-//                }
-//            }
-//        });
-//    }
-    
-    
-    
-    
     /**
      * Creates new form UpdateCar
      */
@@ -112,13 +76,54 @@ Connection con = null;
         });
            setLocationRelativeTo(null);
         con = DBConnection.ConnectionDB();
-        table3.getSelectionModel().addListSelectionListener(new ListSelectionListenerImpl());
-           
-           UpdateTable();
+        table3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+           @Override
+        public void valueChanged(ListSelectionEvent evt) {
+            if (!evt.getValueIsAdjusting()) {
+                int selectedRow = table3.getSelectedRow();
+                if (selectedRow != -1) {
+                    Object Type = table3.getValueAt(selectedRow, 1);
+                    Object Brand = table3.getValueAt(selectedRow, 2);
+                    Object Model = table3.getValueAt(selectedRow, 3);
+                    Object ManfactureYear = table3.getValueAt(selectedRow, 4);
+                    Object Color = table3.getValueAt(selectedRow, 5);
+                    Object LicensePlate = table3.getValueAt(selectedRow, 6);
+ 
+                    Object HourRate = table3.getValueAt(selectedRow, 8);
+                    Object CustomerRenter = table3.getValueAt(selectedRow, 9);
+                    TypeField.setText(Type.toString());
+                    BrandField.setText(Brand.toString());
+                    ModelField.setText(Model.toString());
+                    ManuYearField.setText(ManfactureYear.toString());
+                    ColorField.setText(Color.toString());
+                    LicensePlateField.setText(LicensePlate.toString());
+                    AvailabilityField.getSelectedItem().toString();
+                    HourlyRateField.setText(HourRate.toString());
+                    CustomerField.setText(CustomerRenter.toString());
+                }
+            }
+        }
         
            
+    });
+        UpdateTable();
     }
-    private void UpdateTable(){
+    
+    public void updatecombo() {
+        String sql = "select * from Customer";
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+//                ID2.addItem(rs.getString("ID"));
+            }
+        } catch (Exception e) {
+        }
+
+    }
+    
+    
+    public void UpdateTable(){
         String sql = "select * from Car3;";
         try {
             pst = con.prepareStatement(sql);
@@ -136,6 +141,51 @@ Connection con = null;
         }
             catch(Exception e){
                 
+            }
+        }
+    }
+    
+     public void updateTableWithSearchFilter(String toSearch) {
+        // Use LIKE for partial matches on each key release.
+        String sql = "SELECT * FROM Car3 WHERE ID LIKE ?"
+                + " OR Type LIKE ?"
+                + " OR Brand LIKE ?"
+                + " OR Model LIKE ?"
+                + " OR ManufactureYear LIKE ?"
+                + " OR Color LIKE ?"
+                + " OR LicensePlate LIKE ?"
+                + " OR Availability LIKE ?"
+                + " OR HourlyRate LIKE ?"
+                + " OR CustomerRenter LIKE ?;";
+        try {
+            pst = con.prepareStatement(sql);
+            // Using % around the search text to find any matching part.
+            pst.setString(1, "%" + toSearch + "%");
+            pst.setString(2, "%" + toSearch + "%");
+            pst.setString(3, "%" + toSearch + "%");
+            pst.setString(4, "%" + toSearch + "%");
+            pst.setString(5, "%" + toSearch + "%");
+            pst.setString(6, "%" + toSearch + "%");
+            pst.setString(7, "%" + toSearch + "%");
+            pst.setString(8, "%" + toSearch + "%");
+            pst.setString(9, "%" + toSearch + "%");
+            pst.setString(10, "%" + toSearch + "%");
+            rs = pst.executeQuery();
+            // Set the table model using DbUtils; this handles empty result sets as well.
+            table3.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
+        } finally {
+            try {
+                // Ensure resources are closed.
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
             }
         }
     }
@@ -453,159 +503,65 @@ Connection con = null;
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
 
         int selectedRow = table3.getSelectedRow();
-        if (selectedRow >= 0) {
-            try {
-                String id = table3.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
-                String Type = TypeField.getText().trim().toUpperCase(); 
-                String Brand = BrandField.getText().trim().toUpperCase(); 
-                String Model = ModelField.getText().trim().toUpperCase();
-                String ManfactureYear = ManuYearField.getText().trim().toUpperCase();
-                String Color = ColorField.getText().trim().toUpperCase(); 
-                String LicensePlate = LicensePlateField.getText().trim().toUpperCase();
-                String Availability = AvailabilityField.getSelectedItem().toString().trim().toUpperCase(); 
-                String HourRate = HourlyRateField.getText().trim().toUpperCase(); 
-                String CustomerRenter = CustomerField.getText().trim().toUpperCase();
+    if (selectedRow >= 0) {
+        try {
+            String id = table3.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
+            String Type = TypeField.getText().trim().toUpperCase(); 
+            String Brand = BrandField.getText().trim().toUpperCase(); 
+            String Model = ModelField.getText().trim().toUpperCase();
+            String ManufactureYear = ManuYearField.getText().trim().toUpperCase();
+            String Color = ColorField.getText().trim().toUpperCase(); 
+            String LicensePlate = LicensePlateField.getText().trim().toUpperCase();
+            String Availability = AvailabilityField.getSelectedItem().toString().trim().toUpperCase(); 
+            String HourRate = HourlyRateField.getText().trim().toUpperCase(); 
+            String CustomerRenter = CustomerField.getText().trim().toUpperCase();
 
-                        if (id.isEmpty() || Type.isEmpty()
-                        || Brand.isEmpty()|| Model.isEmpty()
-                        || ManfactureYear.isEmpty()|| Color.isEmpty()
-                        || LicensePlate.isEmpty()|| Availability.isEmpty()
-                        || HourRate.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Name and Email cannot be empty");
-                    return;
-                }
-
-                String sql = "UPDATE Car3 SET "
-               + "Type = ?, "
-               + "Brand = ?, "
-               + "Model = ?, " 
-               + "ManufactureYear = ?,"
-               + "Color = ?, "
-               + "LicensePlate = ?, "
-               + "Availability = ?, "
-               + "HourlyRate = ?, "
-               + "CustomerRenter = ? "
-               + "WHERE ID = ?";
-                try (PreparedStatement pst = con.prepareStatement(sql)) {
-                     pst.setString(1, TypeField.getText());
-                     pst.setString(2, BrandField.getText());
-                     pst.setString(3, ModelField.getText());
-                     pst.setString(4, ManuYearField.getText());
-                     pst.setString(5, ColorField.getText());
-                     pst.setString(6, LicensePlateField.getText());
-                     pst.setString(7, AvailabilityField.getSelectedItem().toString());
-                     pst.setString(8, HourlyRateField.getText());
-                     pst.setString(9, CustomerField.getText());
-                     System.out.println(rs.getString("ID"));
-                     pst.setString(10, table3.getModel().getValueAt(table3.getSelectedRow(), 0).toString() );
-
-                    int affectedRows = pst.executeUpdate();
-                    if (affectedRows > 0) {
-                        JOptionPane.showMessageDialog(null, "Update Successful");
-                        UpdateTable();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Update Failed");
-                    }
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
-            }finally {
-            try {
-                rs.close();
-                pst.close();
-
-            } catch (Exception e) {
-
+            if (Type.isEmpty() || Brand.isEmpty() || Model.isEmpty() || ManufactureYear.isEmpty()
+                || Color.isEmpty() || LicensePlate.isEmpty() || Availability.isEmpty() || HourRate.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All Fields Must Be Full");
+                return;
             }
-        }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        try {
-//           
-//                String sql = "UPDATE Car3 SET "
-//               + "Type = ?, "
-//               + "Brand = ?, "
-//               + "Model = ?, " 
-//               + "ManufactureYear = ?,"
-//               + "Color = ?, "
-//               + "LicensePlate = ?, "
-//               + "Availability = ?, "
-//               + "HourlyRate = ?, "
-//               + "CustomerRenter = ? "
-//               + "WHERE ID = ?";
-//    
-//    pst = con.prepareStatement(sql);
-//    pst.setString(1, TypeField.getText());
-//    pst.setString(2, BrandField.getText());
-//    pst.setString(3, ModelField.getText());
-//    pst.setString(4, ManuYearField.getText());
-//    pst.setString(5, ColorField.getText());
-//    pst.setString(6, LicensePlateField.getText());
-//    pst.setString(7, AvailabilityField.getSelectedItem().toString());
-//    pst.setString(8, HourlyRateField.getText());
-//    pst.setString(9, CustomerField.getText());
-//            System.out.println(rs.getString("ID"));
-//    pst.setString(10, table3.getModel().getValueAt(table3.getSelectedRow(), 0).toString() );
-//           
-//    
-//    pst.executeUpdate();
-//    UpdateTable();
-//    JOptionPane.showMessageDialog(null, "Record Updated successfully");
-//} catch (SQLException e) {
-//    JOptionPane.showMessageDialog(null, e.getMessage());
-//} 
-//       finally{
-//            try{
-//            rs.close();
-//            pst.close();
-//            
-//        }
-//            catch(Exception e){
-//                
-//            }
-//        }
 
+            String sql = "UPDATE Car3 SET "
+           + "Type = ?, "
+           + "Brand = ?, "
+           + "Model = ?, " 
+           + "ManufactureYear = ?,"
+           + "Color = ?, "
+           + "LicensePlate = ?, "
+           + "Availability = ?, "
+           + "HourlyRate = ?, "
+           + "CustomerRenter = ? "
+           + "WHERE ID = ?";
+            try (PreparedStatement pst = con.prepareStatement(sql)) {
+                 pst.setString(1, Type);
+                 pst.setString(2, Brand);
+                 pst.setString(3, Model);
+                 pst.setString(4, ManufactureYear);
+                 pst.setString(5, Color);
+                 pst.setString(6, LicensePlate);
+                 pst.setString(7, Availability);
+                 pst.setString(8, HourRate);
+                 pst.setString(9, CustomerRenter);
+                 pst.setString(10, id);
 
-  
-       
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    JOptionPane.showMessageDialog(null, "Update Successful");
+                    UpdateTable();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Update Failed");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
+        } 
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "No row selected");
+    }
+
+ 
     }//GEN-LAST:event_updateActionPerformed
 
     private void TypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeFieldActionPerformed
@@ -614,34 +570,6 @@ Connection con = null;
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
 
-        int row = table3.getSelectedRow();
-    //  String sql2 =  jj.getSelectedItem().toString();
-     String selection = table3.getModel().getValueAt(row, 0).toString();
-     String sql = "select * from Car3 where ID =" + selection;
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            if(rs.next()){
-                TypeField.setText(rs.getString("Type"));
-                BrandField.setText(rs.getString("Brand"));
-                ModelField.setText(rs.getString("Model"));
-                ManuYearField.setText(rs.getString("ManufactureYear"));
-                ColorField.setText(rs.getString("Color"));
-                LicensePlateField.setText(rs.getString("LicensePlate"));
-                AvailabilityField.setSelectedItem(rs.getString("Availability"));
-                AvailabilityField.setSelectedItem(rs.getString("Availability"));;
-                HourlyRateField.setText(rs.getString("HourlyRate"));
-                CustomerField.setText(rs.getString("CustomerRenter"));
-               
-             // JOptionPane.showMessageDialog(null, "Update Complete");
-
-
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        
-     
     }//GEN-LAST:event_table3MouseClicked
 
     private void table3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_table3KeyReleased
@@ -655,6 +583,7 @@ Connection con = null;
 
     private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
         UpdateTable();
+        
     }//GEN-LAST:event_jLabel12MouseClicked
 
     private void ModelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelFieldActionPerformed
@@ -738,88 +667,5 @@ Connection con = null;
     private javax.swing.JTable table3;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
-
-
-
-    
-     private void updateTableWithSearchFilter(String toSearch) {
-        // Use LIKE for partial matches on each key release.
-        String sql = "SELECT * FROM Car3 WHERE ID LIKE ?"
-                + " OR Type LIKE ?"
-                + " OR Brand LIKE ?"
-                + " OR Model LIKE ?"
-                + " OR ManufactureYear LIKE ?"
-                + " OR Color LIKE ?"
-                + " OR LicensePlate LIKE ?"
-                + " OR Availability LIKE ?"
-                + " OR HourlyRate LIKE ?"
-                + " OR CustomerRenter LIKE ?;";
-        try {
-            pst = con.prepareStatement(sql);
-            // Using % around the search text to find any matching part.
-            pst.setString(1, "%" + toSearch + "%");
-            pst.setString(2, "%" + toSearch + "%");
-            pst.setString(3, "%" + toSearch + "%");
-            pst.setString(4, "%" + toSearch + "%");
-            pst.setString(5, "%" + toSearch + "%");
-            pst.setString(6, "%" + toSearch + "%");
-            pst.setString(7, "%" + toSearch + "%");
-            pst.setString(8, "%" + toSearch + "%");
-            pst.setString(9, "%" + toSearch + "%");
-            pst.setString(10, "%" + toSearch + "%");
-            rs = pst.executeQuery();
-            // Set the table model using DbUtils; this handles empty result sets as well.
-            table3.setModel(DbUtils.resultSetToTableModel(rs));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
-        } finally {
-            try {
-                // Ensure resources are closed.
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
-            }
-        }
-    }
-
-    private class ListSelectionListenerImpl implements ListSelectionListener {
-
-        public ListSelectionListenerImpl() {
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent evt) {
-            if (!evt.getValueIsAdjusting()) {
-                int selectedRow = table3.getSelectedRow();
-                if (selectedRow != -1) {
-                    Object Type = table3.getValueAt(selectedRow, 1);
-                    Object Brand = table3.getValueAt(selectedRow, 2);
-                    Object Model = table3.getValueAt(selectedRow, 3);
-                    Object ManfactureYear = table3.getValueAt(selectedRow, 4);
-                    Object Color = table3.getValueAt(selectedRow, 5);
-                    Object LicensePlate = table3.getValueAt(selectedRow, 6);
-                    Object Availability = table3.getValueAt(selectedRow, 7);
-                    Object HourRate = table3.getValueAt(selectedRow, 8);
-                    Object CustomerRenter = table3.getValueAt(selectedRow, 9);
-                    TypeField.setText(Type.toString());
-                    BrandField.setText(Brand.toString());
-                    ModelField.setText(Model.toString());
-                    ManuYearField.setText(ManfactureYear.toString());
-                    ColorField.setText(Color.toString());
-                    LicensePlateField.setText(LicensePlate.toString());
-                    AvailabilityField.getSelectedItem().toString();
-                    HourlyRateField.setText(HourRate.toString());
-                    CustomerField.setText(CustomerRenter.toString());
-                }
-            }
-        }
-    }
-    
-    
-    
+  
 }
