@@ -191,7 +191,7 @@ public class LoginTable1 extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
 
-        jPanel2.setBackground(new java.awt.Color(99, 63, 42));
+        jPanel2.setBackground(new java.awt.Color(148, 79, 46));
         jPanel2.setPreferredSize(new java.awt.Dimension(400, 500));
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
