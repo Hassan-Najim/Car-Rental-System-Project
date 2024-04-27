@@ -242,6 +242,7 @@ public class Menu extends javax.swing.JFrame  {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        jButton9.setFocusPainted(false); 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CarInfoManagement().setVisible(true);
@@ -253,7 +254,7 @@ public class Menu extends javax.swing.JFrame  {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomersInfoManagament().setVisible(true);
+                new CarInfoManagement().setVisible(true);
             }
         });
         this.dispose();
