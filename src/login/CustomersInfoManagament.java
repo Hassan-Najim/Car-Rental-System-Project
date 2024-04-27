@@ -140,10 +140,11 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
         table5 = new javax.swing.JTable();
         searchTextField = new javax.swing.JTextField();
         backBtn = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        refreshBtn = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        refreshBtn1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(244, 235, 218));
@@ -198,7 +199,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
         jLabel5.setText("Customer Table");
 
         jLabel4.setBackground(new java.awt.Color(0, 102, 102));
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(99, 63, 42));
         jLabel4.setText("Customer Managment");
 
@@ -243,18 +244,6 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Search_Icon_1.png"))); // NOI18N
-
-        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Search Bar");
-
-        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
-        refreshBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshBtnMouseClicked(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(225, 220, 209));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -268,6 +257,24 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        refreshBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
+        refreshBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshBtn1MouseClicked(evt);
+            }
+        });
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Search_Icon_1.png"))); // NOI18N
+
+        jButton1.setBackground(new java.awt.Color(244, 235, 218));
+        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Documents\\GitHub\\SOFTWARE-CONSTRUCTION-Project\\Images\\Refresh icon.png")); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setFocusable(false);
+
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Documents\\GitHub\\SOFTWARE-CONSTRUCTION-Project\\Images\\Search Icon.png")); // NOI18N
+        jLabel11.setText("Search Bar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -279,21 +286,23 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
                         .addComponent(backBtn)
                         .addGap(208, 208, 208)
                         .addComponent(jLabel4)
-                        .addGap(0, 42, Short.MAX_VALUE))
+                        .addGap(0, 128, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(CustomerTable)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(refreshBtn)
+                                .addComponent(refreshBtn1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CustomerTable))))
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(16, 16, 16)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -308,25 +317,24 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(backBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(refreshBtn)
-                                    .addComponent(jLabel1))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 100, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))))
+                        .addGap(75, 75, 75)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(refreshBtn1)
+                            .addComponent(jLabel14))
+                        .addGap(10, 10, 10)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -336,7 +344,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
                         .addGap(36, 36, 36)
                         .addComponent(updateACustomerInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(CustomerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -426,11 +434,6 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnMouseClicked
 
-    private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
-        UpdateTable();
-        
-    }//GEN-LAST:event_refreshBtnMouseClicked
-
     private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1FocusGained
@@ -438,6 +441,11 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
     private void jPanel1HierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jPanel1HierarchyChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1HierarchyChanged
+
+    private void refreshBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtn1MouseClicked
+        UpdateTable();
+        //        updatecombo();
+    }//GEN-LAST:event_refreshBtn1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -479,13 +487,14 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
     private javax.swing.JScrollPane CustomerTable;
     private javax.swing.JButton addCutmoerBttn;
     private javax.swing.JLabel backBtn;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel refreshBtn;
+    private javax.swing.JLabel refreshBtn1;
     private javax.swing.JButton removeAcustomer;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JTable table5;
