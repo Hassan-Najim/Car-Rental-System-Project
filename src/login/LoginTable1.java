@@ -5,11 +5,9 @@
 package login;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -36,8 +34,6 @@ public class LoginTable1 extends javax.swing.JFrame {
 
     public LoginTable1() {
         initComponents();
-        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
-        this.setIconImage(icon);
         applyHoverEffect(btnLogin2);
         applyHoverEffect(btnExit);
         applyHoverEffect(btnRegister);
@@ -187,7 +183,6 @@ public class LoginTable1 extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Car Rental System");
         setBackground(new java.awt.Color(255, 255, 255));
         setForeground(java.awt.Color.white);
 

@@ -4,9 +4,7 @@
  */
 package login;
 
-import java.awt.Image;
 import java.sql.*;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -23,8 +21,6 @@ public class RentCar extends javax.swing.JFrame {
         con = DBConnection.ConnectionDB();
         UpdateTable();
         updatecombo();
-        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
-        this.setIconImage(icon);
         SearchTextFieldCar.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -45,10 +41,9 @@ public class RentCar extends javax.swing.JFrame {
     
 
     private void UpdateTable() {
-        String sql = "select * from Car3 where Availability = ? ;";
+        String sql = "select * from Car3;";
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1, "Available");
             rs = pst.executeQuery();
             table3.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -66,10 +61,9 @@ public class RentCar extends javax.swing.JFrame {
     }
 
     private void updatecombo() {
-        String sql = "select * from Car3 where Availability = ? ;";
+        String sql = "select * from Car3";
         try {
             pst = con.prepareStatement(sql);
-            pst.setString(1, "Available");
             rs = pst.executeQuery();
             while (rs.next()) {
             }
@@ -88,6 +82,7 @@ public class RentCar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        backBtn = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table3 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
@@ -96,16 +91,22 @@ public class RentCar extends javax.swing.JFrame {
         Customer = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         SearchTextFieldCar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
+
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
+        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backBtnMouseClicked(evt);
+            }
+        });
 
         table3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,8 +151,9 @@ public class RentCar extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Enter Customer ID :");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Available Car Table");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(97, 60, 42));
+        jLabel1.setText("Available Cars Table");
 
         RentCarButton.setText("Rent");
         RentCarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -175,15 +177,6 @@ public class RentCar extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(244, 235, 218));
-        jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Desktop\\Database\\Login\\Images\\back button.png")); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(225, 220, 209));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -198,6 +191,7 @@ public class RentCar extends javax.swing.JFrame {
         );
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(97, 60, 42));
         jLabel4.setText("Rent a Car");
 
         SearchTextFieldCar.addActionListener(new java.awt.event.ActionListener() {
@@ -207,75 +201,80 @@ public class RentCar extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Desktop\\Database\\Login\\Images\\Search Icon.png")); // NOI18N
         jLabel2.setText("  Search Bar");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)))
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3)
-                            .addComponent(id)
-                            .addComponent(jLabel9)
-                            .addComponent(Customer))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(57, 274, Short.MAX_VALUE)
-                        .addComponent(RentCarButton)
-                        .addGap(103, 103, 103))))
+                        .addContainerGap()
+                        .addComponent(backBtn)))
+                .addGap(16, 16, 16)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3)
+                        .addComponent(id, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addComponent(Customer))
+                    .addComponent(RentCarButton))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backBtn)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(RentCarButton)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(82, 82, 82)))
+                .addGap(213, 213, 213)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Customer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(RentCarButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -294,26 +293,20 @@ public class RentCar extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void RentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarButtonActionPerformed
-        try {
-        // Check if the entered customer ID exists in the Customer4 table
+         try {
+        // Check if the entered customer ID exists in the Customer table
         String customerID = Customer.getText();
-        String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
+        String customerQuery = "SELECT * FROM Customer WHERE ID = ?";
         pst = con.prepareStatement(customerQuery);
         pst.setString(1, customerID);
         rs = pst.executeQuery();
-
+        
         // If the customer ID exists, proceed to update the Car3 table
         if (rs.next()) {
             String carID = id.getText();
             String customerName = rs.getString("ID");
-            
-            // Update the Car3 table to assign the car to the customer
-            String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = NULL WHERE ID = ?";
+            String updateSql = "UPDATE Car3 SET CustomerRenter = ? WHERE ID = ?";
             pst = con.prepareStatement(updateSql);
             pst.setString(1, customerName);
             pst.setString(2, carID);
@@ -383,6 +376,21 @@ public class RentCar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchTextFieldCarActionPerformed
 
+    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Menu().setVisible(true);
+            }
+
+        });
+        this.dispose();
+    }//GEN-LAST:event_backBtnMouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        UpdateTable();
+        updatecombo();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -423,12 +431,13 @@ public class RentCar extends javax.swing.JFrame {
     private javax.swing.JTextField Customer;
     private javax.swing.JButton RentCarButton;
     private javax.swing.JTextField SearchTextFieldCar;
+    private javax.swing.JLabel backBtn;
     private javax.swing.JTextField id;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -438,40 +447,47 @@ public class RentCar extends javax.swing.JFrame {
 
     private void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-    String sql = "SELECT * FROM Car3 WHERE (ID LIKE ?"
-            + " OR Type LIKE ?"
-            + " OR Brand LIKE ?"
-            + " OR Model LIKE ?"
-            + " OR ManufactureYear LIKE ?"
-            + " OR Color LIKE ?"
-            + " OR LicensePlate LIKE ?"
-            + " OR HourlyRate LIKE ?"
-            + " OR CustomerRenter LIKE ?)"
-            + " AND Availability = 'Available';";
-    try {
-        pst = con.prepareStatement(sql);
-        // Using % around the search text to find any matching part.
-        for (int i = 1; i <= 9; i++) {
-            pst.setString(i, "%" + toSearch + "%");
-        }
-        rs = pst.executeQuery();
-        // Set the table model using DbUtils; this handles empty result sets as well.
-        table3.setModel(DbUtils.resultSetToTableModel(rs));
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
-    } finally {
+        String sql = "SELECT * FROM Car3 WHERE ID LIKE ?"
+                + " OR Type LIKE ?"
+                + " OR Brand LIKE ?"
+                + " OR Model LIKE ?"
+                + " OR ManufactureYear LIKE ?"
+                + " OR Color LIKE ?"
+                + " OR LicensePlate LIKE ?"
+                + " OR Availability LIKE ?"
+                + " OR HourlyRate LIKE ?"
+                + " OR CustomerRenter LIKE ?;";
         try {
-            // Ensure resources are closed.
-            if (rs != null) {
-                rs.close();
-            }
-            if (pst != null) {
-                pst.close();
-            }
+            pst = con.prepareStatement(sql);
+            // Using % around the search text to find any matching part.
+            pst.setString(1, "%" + toSearch + "%");
+            pst.setString(2, "%" + toSearch + "%");
+            pst.setString(3, "%" + toSearch + "%");
+            pst.setString(4, "%" + toSearch + "%");
+            pst.setString(5, "%" + toSearch + "%");
+            pst.setString(6, "%" + toSearch + "%");
+            pst.setString(7, "%" + toSearch + "%");
+            pst.setString(8, "%" + toSearch + "%");
+            pst.setString(9, "%" + toSearch + "%");
+            pst.setString(10, "%" + toSearch + "%");
+            rs = pst.executeQuery();
+            // Set the table model using DbUtils; this handles empty result sets as well.
+            table3.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
+        } finally {
+            try {
+                // Ensure resources are closed.
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
         }
     }
-}
 
 }

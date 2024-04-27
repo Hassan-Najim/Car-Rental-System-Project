@@ -5,11 +5,9 @@
 package login;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -42,8 +40,6 @@ public class Registration extends javax.swing.JFrame {
         initComponents();
         applyHoverEffect(btnRegister);
         applyHoverEffect(jButton1);
-        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
-        this.setIconImage(icon);
 
         con = DBConnection.ConnectionDB();
     }
@@ -68,7 +64,6 @@ public class Registration extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(148, 79, 46));
         jPanel1.setForeground(new java.awt.Color(0, 102, 102));
