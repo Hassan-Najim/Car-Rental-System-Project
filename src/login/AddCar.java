@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package login;
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,26 +13,26 @@ import javax.swing.JOptionPane;
  * @author moeja
  */
 public class AddCar extends javax.swing.JFrame {
-
     private String originalText;
-    Connection con = null;
+ Connection con = null;
     PreparedStatement pst = null;
-    ResultSet rs = null;
-
+    ResultSet rs = null;  
+    
     public AddCar() {
         initComponents();
-        con = DBConnection.ConnectionDB();
+        con=DBConnection.ConnectionDB();
         originalText = jLabel6.getText();
         Update();
     }
-
-    public void Update() {
+   
+    
+    public void Update(){
         String sql = "select * from Car3;";
         try {
             pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                //             Ava.addItem(rs.getString("Availability"));
+            rs= pst.executeQuery();
+            while(rs.next()){
+   //             Ava.addItem(rs.getString("Availability"));
             }
         } catch (Exception e) {
         }
@@ -66,7 +65,7 @@ public class AddCar extends javax.swing.JFrame {
         Color = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        backBtn = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,18 +78,29 @@ public class AddCar extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setBackground(new java.awt.Color(99, 63, 42));
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(99, 63, 42));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Type:");
         jLabel2.setAlignmentX(0.5F);
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(99, 63, 42));
         jLabel3.setText("Brand:");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(99, 63, 42));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Model:");
         jLabel4.setAlignmentX(0.5F);
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(99, 63, 42));
         jLabel5.setText("Manfacture Year:");
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(99, 63, 42));
         jLabel6.setText("License Plate:* ");
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -104,6 +114,8 @@ public class AddCar extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(99, 63, 42));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Hourly Rate ($/h):");
         jLabel8.setAlignmentX(0.5F);
@@ -120,14 +132,18 @@ public class AddCar extends javax.swing.JFrame {
 
         HourlyRate.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
+        AddCar.setBackground(new java.awt.Color(255, 232, 191));
+        AddCar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         AddCar.setText("Add Car");
+        AddCar.setAlignmentY(0.0F);
+        AddCar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         AddCar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddCarActionPerformed(evt);
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(97, 60, 42));
         jLabel10.setText("Add Car");
 
@@ -138,12 +154,15 @@ public class AddCar extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(99, 63, 42));
         jLabel1.setText("Color:");
 
-        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
-        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backBtnMouseClicked(evt);
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -185,8 +204,8 @@ public class AddCar extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(backBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -195,10 +214,10 @@ public class AddCar extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(HourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(100, 100, 100)
-                                .addComponent(AddCar))
+                                .addGap(92, 92, 92)
+                                .addComponent(AddCar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel8))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -211,7 +230,7 @@ public class AddCar extends javax.swing.JFrame {
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(backBtn)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -244,7 +263,7 @@ public class AddCar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddCar))
+                    .addComponent(AddCar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
@@ -270,42 +289,46 @@ public class AddCar extends javax.swing.JFrame {
     private void AddCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCarActionPerformed
         int nextID = 1; // Default starting ID
         String idSql = "SELECT MAX(CAST(ID AS INT)) FROM Car3";
-        try (PreparedStatement pstId = con.prepareStatement(idSql); ResultSet rsId = pstId.executeQuery()) {
+        try (PreparedStatement pstId = con.prepareStatement(idSql);
+        ResultSet rsId = pstId.executeQuery())
+        {
             if (rsId.next() && rsId.getInt(1) != 0) {
-                System.out.println("from id " + rsId.getInt(1));
-                nextID = rsId.getInt(1) + 1; // Increment ID based on the highest value in the database
-            }
-        } catch (SQLException ex) {
+            System.out.println("from id " + rsId.getInt(1));
+            nextID = rsId.getInt(1) + 1; // Increment ID based on the highest value in the database
+    }
+}       catch (SQLException ex) { 
             Logger.getLogger(AddCar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        try {
+        try{
             String sql = "INSERT INTO Car3 VALUES(?,?,?,?,?,?,?,?,?,?); ";
             pst = con.prepareStatement(sql);
             pst.setInt(1, nextID);
-            pst.setString(2, Type.getText());
-            pst.setString(3, Brand.getText());
-            pst.setString(4, Model.getText());
-            pst.setString(5, ManfactureYear.getText());
+            pst.setString(2,Type.getText());
+            pst.setString(3,Brand.getText());
+            pst.setString(4,Model.getText());
+            pst.setString(5,ManfactureYear.getText());
             pst.setString(6, Color.getText());
-            pst.setString(7, LicensePlate.getText());
+            pst.setString(7,LicensePlate.getText());
             pst.setString(8, "Avialable");
             pst.setString(9, HourlyRate.getText());
             pst.setString(10, null);
-
+            
             pst.execute();
             System.out.println("Registration Successfull");
             JOptionPane.showMessageDialog(null, "Car Successfully Added");
-        } catch (Exception e) {
+        }
+        catch(Exception e){
             System.out.println("Registration UnSuccessfull" + e);
             JOptionPane.showMessageDialog(null, "Error");
-        } finally {
-            try {
+        }
+        finally{
+            try{
                 rs.close();
                 pst.close();
-                this.dispose();
-                System.out.println("Added a car and closed");
-            } catch (Exception e) {
+
+            }
+            catch(Exception e){
 
             }
         }
@@ -321,7 +344,7 @@ public class AddCar extends javax.swing.JFrame {
     }//GEN-LAST:event_TypeActionPerformed
 
     private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
-        jLabel6.setText("<html><u><font color='blue'>License Plate:*</font></u></html>");
+         jLabel6.setText("<html><u><font color='blue'>License Plate:*</font></u></html>");
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
@@ -332,10 +355,9 @@ public class AddCar extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "Licene plate Example: 12 AS 1234");
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
-
-        this.dispose();
-    }//GEN-LAST:event_backBtnMouseClicked
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+this.dispose();       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,7 +404,7 @@ public class AddCar extends javax.swing.JFrame {
     private javax.swing.JTextField ManfactureYear;
     private javax.swing.JTextField Model;
     private javax.swing.JTextField Type;
-    private javax.swing.JLabel backBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

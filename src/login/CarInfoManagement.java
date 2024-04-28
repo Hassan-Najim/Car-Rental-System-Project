@@ -38,6 +38,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
             }
         });
     }
+     
     
 
     private void UpdateTable() {
@@ -71,6 +72,10 @@ public class CarInfoManagement extends javax.swing.JFrame {
         }
 
     }
+    private String getStringValueFromTable(int row, int column) {
+    Object value = table3.getValueAt(row, column);
+    return (value != null) ? value.toString() : "";
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,11 +87,9 @@ public class CarInfoManagement extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        backBtn = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table3 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         SearchTextFieldCar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -94,23 +97,16 @@ public class CarInfoManagement extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
-        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backBtnMouseClicked(evt);
-            }
-        });
-
-        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-
+        table3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        table3.setForeground(new java.awt.Color(99, 63, 42));
         table3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -123,7 +119,11 @@ public class CarInfoManagement extends javax.swing.JFrame {
             new String [] {
                 "Car ID", "Type", "Brand", "Model", "Color", "License Plate", "Availability", "Hour Rate", "Customer "
             }
+
         ) {
+            //public boolean isCellEditable(int row, int column) {
+                // Make all cells non-editable
+                //return false;}
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
             };
@@ -131,197 +131,203 @@ public class CarInfoManagement extends javax.swing.JFrame {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
-        });
-        table3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                table3MouseClicked(evt);
-            }
-        });
-        table3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                table3KeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table3);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(97, 60, 42));
-        jLabel1.setText("All Cars Table");
+        }
 
-        jButton2.setBackground(new java.awt.Color(244, 235, 218));
-        jButton2.setBorderPainted(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+    );
+    table3.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            table3MouseClicked(evt);
+        }
+    });
+    table3.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            table3KeyReleased(evt);
+        }
+    });
+    jScrollPane1.setViewportView(table3);
 
-        jPanel2.setBackground(new java.awt.Color(225, 220, 209));
+    jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+    jLabel1.setForeground(new java.awt.Color(99, 63, 42));
+    jLabel1.setText("Car Management");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+    jPanel2.setBackground(new java.awt.Color(225, 220, 209));
 
-        SearchTextFieldCar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchTextFieldCarActionPerformed(evt);
-            }
-        });
+    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+    jPanel2.setLayout(jPanel2Layout);
+    jPanel2Layout.setHorizontalGroup(
+        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 9, Short.MAX_VALUE)
+    );
+    jPanel2Layout.setVerticalGroup(
+        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGap(0, 0, Short.MAX_VALUE)
+    );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("  Search Bar");
+    SearchTextFieldCar.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            SearchTextFieldCarActionPerformed(evt);
+        }
+    });
 
-        jButton1.setBackground(new java.awt.Color(255, 232, 191));
-        jButton1.setText("Update Car Info");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton1.setPreferredSize(new java.awt.Dimension(103, 51));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+    jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+    jLabel2.setForeground(new java.awt.Color(99, 63, 42));
+    jLabel2.setText("  Search Bar");
 
-        jButton3.setBackground(new java.awt.Color(255, 232, 191));
-        jButton3.setText("Add Car");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton3.setPreferredSize(new java.awt.Dimension(103, 51));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
+    jButton1.setBackground(new java.awt.Color(255, 232, 191));
+    jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+    jButton1.setText("Update Car Info");
+    jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+    jButton1.setPreferredSize(new java.awt.Dimension(103, 51));
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
+        }
+    });
 
-        jButton4.setBackground(new java.awt.Color(255, 232, 191));
-        jButton4.setText("Remove Car");
-        jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton4.setPreferredSize(new java.awt.Dimension(103, 51));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+    jButton3.setBackground(new java.awt.Color(255, 232, 191));
+    jButton3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+    jButton3.setText("Add Car");
+    jButton3.setAlignmentY(0.0F);
+    jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+    jButton3.setPreferredSize(new java.awt.Dimension(103, 51));
+    jButton3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton3ActionPerformed(evt);
+        }
+    });
 
-        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel3MouseClicked(evt);
-            }
-        });
+    jButton4.setBackground(new java.awt.Color(255, 232, 191));
+    jButton4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+    jButton4.setText("Remove Car");
+    jButton4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+    jButton4.setPreferredSize(new java.awt.Dimension(103, 51));
+    jButton4.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton4ActionPerformed(evt);
+        }
+    });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
+    jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jLabel3MouseClicked(evt);
+        }
+    });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(97, 60, 42));
-        jLabel4.setText("Car Management");
+    jButton5.setBackground(new java.awt.Color(244, 235, 218));
+    jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
+    jButton5.setContentAreaFilled(false);
+    jButton5.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton5ActionPerformed(evt);
+        }
+    });
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Search_Icon_1.png"))); // NOI18N
+    jLabel4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+    jLabel4.setForeground(new java.awt.Color(99, 63, 42));
+    jLabel4.setText("All Cars Table");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel4))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel3)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2)))
-                                .addGap(20, 20, 20)
-                                .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backBtn)))
-                .addGap(16, 16, 16)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(backBtn)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(22, 22, 22))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+    jButton2.setBackground(new java.awt.Color(244, 235, 218));
+    jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
+    jButton2.setContentAreaFilled(false);
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton2ActionPerformed(evt);
+        }
+    });
+
+    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+    jPanel1.setLayout(jPanel1Layout);
+    jPanel1Layout.setHorizontalGroup(
+        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(16, 16, 16))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)))
-                        .addGap(9, 9, 9)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
-        );
+                            .addGap(183, 183, 183))))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(52, 52, 52)
+                    .addComponent(jLabel4)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(212, 212, 212))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButton2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(51, 51, 51)))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(69, 69, 69)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addContainerGap(81, Short.MAX_VALUE))
+    );
+    jPanel1Layout.setVerticalGroup(
+        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(34, 34, 34)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(21, 21, 21)
+                    .addComponent(jLabel1)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))))
+                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(29, 29, 29))
+        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(27, 27, 27)
+            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(35, 35, 35)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(116, 116, 116))
+    );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    );
 
-        pack();
-        setLocationRelativeTo(null);
+    pack();
+    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // Get the selected row index
-    int selectedRow = table3.getSelectedRow();
+  /*  int selectedRow = table3.getSelectedRow();
     
     // Check if a row is selected
     if (selectedRow == -1) {
@@ -372,6 +378,59 @@ public class CarInfoManagement extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error deleting car entry: " + ex.getMessage(), "Deletion Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+        */
+  int selectedRow = table3.getSelectedRow();
+
+// Check if a row is selected
+if (selectedRow == -1) {
+    JOptionPane.showMessageDialog(this, "Please select a row to delete.", "No row selected", JOptionPane.WARNING_MESSAGE);
+    return;
+}
+
+// Extract information from the selected row
+String id = getStringValueFromTable(selectedRow, 0);
+String type = getStringValueFromTable(selectedRow, 1);
+String brand = getStringValueFromTable(selectedRow, 2);
+String model = getStringValueFromTable(selectedRow, 3);
+String manufactureYear = getStringValueFromTable(selectedRow, 4);
+String color = getStringValueFromTable(selectedRow, 5);
+String licensePlate = getStringValueFromTable(selectedRow, 6);
+String availability = getStringValueFromTable(selectedRow, 7);
+String hourlyRate = getStringValueFromTable(selectedRow, 8);
+String customerRenter = getStringValueFromTable(selectedRow, 9);
+
+// Construct the confirmation message
+String confirmationMessage = "Are you sure you want to delete the following car entry?\n\n"
+        + "ID: " + id + "\n"
+        + "Type: " + type + "\n"
+        + "Brand: " + brand + "\n"
+        + "Model: " + model + "\n"
+        + "Manufacture Year: " + manufactureYear + "\n"
+        + "Color: " + color + "\n"
+        + "License Plate: " + licensePlate + "\n"
+        + "Availability: " + availability + "\n"
+        + "Hourly Rate: " + hourlyRate + "\n"
+        + "Customer Renter: " + customerRenter + "\n\n"
+        + "This action cannot be undone.";
+
+// Display confirmation dialog
+int choice = JOptionPane.showConfirmDialog(this, confirmationMessage, "Confirm Deletion", JOptionPane.OK_CANCEL_OPTION);
+
+// Check user's choice
+if (choice == JOptionPane.OK_OPTION) {
+    // User confirmed deletion, delete the entry from the database
+    String deleteQuery = "DELETE FROM Car3 WHERE ID = ?";
+    try {
+        pst = con.prepareStatement(deleteQuery);
+        pst.setString(1, id);
+        pst.executeUpdate();
+        JOptionPane.showMessageDialog(this, "Car entry deleted successfully.", "Deletion Successful", JOptionPane.INFORMATION_MESSAGE);
+        UpdateTable(); // Update the table after deletion
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error deleting car entry: " + ex.getMessage(), "Deletion Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+  
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -382,22 +441,38 @@ public class CarInfoManagement extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true);
-            }
-
-        });
-        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void table3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_table3KeyReleased
 
     }//GEN-LAST:event_table3KeyReleased
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
-      
+table3.setDefaultEditor(Object.class, null);
+        /*     int row = table3.getSelectedRow();
+        String selection = table3.getModel().getValueAt(row, 0).toString();
+        String sql = "select * from Car3 where ID =" + selection;
+        String selection2 = table3.getModel().getValueAt(row, 6).toString();
+        String sql2 = "select * from Car3 where Availability =" + selection2;
+
+        //
+        try {
+            pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                Customer.setText(rs.getString("CustomerRenter"));
+                id.setText(rs.getString("ID"));
+
+                // JOptionPane.showMessageDialog(null, "Update Complete");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        */
+        //boolean a = table3.isEditing();
+      //  /if (a==false) {
+          //  JOptionPane.showMessageDialog(null, "Cannot Edit Table");
+            
+        
+    
     }//GEN-LAST:event_table3MouseClicked
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -417,15 +492,21 @@ public class CarInfoManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchTextFieldCarActionPerformed
 
-    private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+
+jButton5.setBorderPainted(false);
+java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
             }
-
         });
-        this.dispose();
-    }//GEN-LAST:event_backBtnMouseClicked
+ this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         UpdateTable();
+        updatecombo();
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -465,17 +546,15 @@ public class CarInfoManagement extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField SearchTextFieldCar;
-    private javax.swing.JLabel backBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

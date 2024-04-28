@@ -20,10 +20,36 @@ public class RemoveACustmoer extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
+    // private JButton jButton1;
 
-   
+    private void applyHoverEffect(JButton button) {
+        Color originalColor = button.getBackground();
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                button.setBackground(originalColor.darker());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                button.setBackground(originalColor);
+            }
+        });
+    }
+
     public RemoveACustmoer() {
         initComponents();
+        applyHoverEffect(removeACustomerBtn);
+        applyHoverEffect(jButton2);
+        setLocationRelativeTo(null);
+        con = DBConnection.ConnectionDB();
+     //   jButton1 = new JButton("Button");
+
+        // Remove the border from jButton1
+        //jButton1.setBorder(null);
+
+        // Add jButton1 to the JFrame
+  //  add(jButton1);
     }
 
     /**
@@ -35,21 +61,210 @@ public class RemoveACustmoer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        IdToRemove = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        removeACustomerBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(244, 235, 218));
+
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(99, 63, 42));
+        jLabel3.setText("ID:");
+
+        IdToRemove.setBackground(new java.awt.Color(255, 232, 191));
+        IdToRemove.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
+        IdToRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IdToRemoveActionPerformed(evt);
+            }
+        });
+
+        jButton2.setBackground(new java.awt.Color(255, 232, 191));
+        jButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton2.setText("Exit");
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(99, 63, 42));
+        jLabel2.setText("Remove A Customer");
+
+        removeACustomerBtn.setBackground(new java.awt.Color(255, 232, 191));
+        removeACustomerBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        removeACustomerBtn.setText("Remove Customer");
+        removeACustomerBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
+        removeACustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeACustomerBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(244, 235, 218));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(removeACustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(189, 189, 189)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(IdToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addGap(63, 63, 63)
+                .addComponent(jLabel2)
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IdToRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(removeACustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(69, 69, 69))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 276, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void removeACustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeACustomerBtnActionPerformed
+        String inputId = IdToRemove.getText().trim(); // Assuming txtIdTextField is your JTextField for ID input
+
+        if (inputId.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ID field cannot be empty.");
+            return;
+        }
+
+        String checkSql = "SELECT COUNT(*) FROM Customer4 WHERE ID = ?;";
+        String deleteSql = "DELETE FROM Customer4 WHERE ID = ?;";
+
+        try {
+            // Start a transaction
+            con.setAutoCommit(false);
+
+            // Check if ID exists
+            int count = 0;
+            try (PreparedStatement pstCheck = con.prepareStatement(checkSql)) {
+                pstCheck.setInt(1, Integer.parseInt(inputId));
+                ResultSet rs = pstCheck.executeQuery();
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+                rs.close();
+            }
+
+            if (count == 0) {
+                JOptionPane.showMessageDialog(null, "No record found with ID: " + inputId);
+                con.rollback();
+            } else {
+                // If ID exists, delete the row
+                try (PreparedStatement pstDelete = con.prepareStatement(deleteSql)) {
+                    pstDelete.setInt(1, Integer.parseInt(inputId));
+                    int affectedRows = pstDelete.executeUpdate();
+                    if (affectedRows > 0) {
+                        JOptionPane.showMessageDialog(null, "Record deleted successfully.");
+                        con.commit();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Deletion failed.");
+                        con.rollback();
+                    }
+                }
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid integer ID.");
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Database error: " + e.getMessage());
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } finally {
+            try {
+                con.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_removeACustomerBtnActionPerformed
+
+    private void IdToRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdToRemoveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IdToRemoveActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+this.dispose();       
+jButton1.setBorderPainted(false);
+ 
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -80,11 +295,23 @@ public class RemoveACustmoer extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        
 
         /* Create and display the form */
-       
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new RemoveACustmoer().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField IdToRemove;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton removeACustomerBtn;
     // End of variables declaration//GEN-END:variables
 }

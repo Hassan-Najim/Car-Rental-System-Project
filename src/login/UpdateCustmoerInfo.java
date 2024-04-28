@@ -96,11 +96,11 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
             }
         });
         UpdateTable();
-
+        updatecombo();
     }
 
     public void updatecombo() {
-        String sql = "select * from Customer";
+        String sql = "select * from Customer4";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -113,7 +113,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
     }
 
     protected void UpdateTable() {
-        String sql = "select * from Customer;";
+        String sql = "select * from Customer4;";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -134,7 +134,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     public void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-        String sql = "SELECT * FROM Customer WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
+        String sql = "SELECT * FROM Customer4 WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
         try {
             pst = con.prepareStatement(sql);
             // Using % around the search text to find any matching part.
@@ -176,7 +176,6 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         backBtn = new javax.swing.JLabel();
         searchTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        refreshBtn = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         CustomerTable = new javax.swing.JScrollPane();
         table5 = new javax.swing.JTable();
@@ -185,12 +184,13 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         NameToBeInserted = new javax.swing.JTextField();
         EmailToBeInserted = new javax.swing.JTextField();
         UpdateBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(99, 63, 42));
         jLabel2.setText("Update Customer Info");
 
@@ -213,14 +213,8 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         });
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(99, 63, 42));
         jLabel6.setText("Search Bar");
-
-        refreshBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
-        refreshBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshBtnMouseClicked(evt);
-            }
-        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(99, 63, 42));
@@ -231,17 +225,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         CustomerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         table5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        table5.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "ID", "Customer Name", "Email"
-            }
-        ));
+        table5.setForeground(new java.awt.Color(99, 63, 42));
         table5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 table5MouseClicked(evt);
@@ -254,13 +238,13 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         });
         CustomerTable.setViewportView(table5);
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(99, 63, 42));
-        jLabel8.setText("Name");
+        jLabel8.setText("Name:");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(99, 63, 42));
-        jLabel9.setText("Email");
+        jLabel9.setText("Email:");
 
         NameToBeInserted.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         NameToBeInserted.addActionListener(new java.awt.event.ActionListener() {
@@ -272,12 +256,22 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         EmailToBeInserted.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
 
         UpdateBtn.setBackground(new java.awt.Color(255, 232, 191));
-        UpdateBtn.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        UpdateBtn.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         UpdateBtn.setText("Update");
-        UpdateBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        UpdateBtn.setAlignmentY(0.0F);
+        UpdateBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(97, 60, 42), 2));
         UpdateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdateBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(244, 235, 218));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/Refresh_icon.png"))); // NOI18N
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -285,60 +279,62 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(backBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(61, 61, 61)
-                .addComponent(EmailToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(61, 61, 61))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CustomerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(80, 80, 80)
-                        .addComponent(refreshBtn)
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CustomerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(25, 25, 25)
-                                .addComponent(NameToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel7)
+                                .addGap(108, 108, 108)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(25, 25, 25)
+                                        .addComponent(NameToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(backBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(61, 61, 61)
+                        .addComponent(EmailToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 61, 61))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(backBtn)
+                    .addComponent(jLabel2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addComponent(jLabel7)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(backBtn)
-                            .addComponent(jLabel2))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7))))
-                    .addComponent(refreshBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CustomerTable, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -350,7 +346,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(EmailToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
+                        .addGap(73, 73, 73)
                         .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -380,13 +376,8 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchTextFieldSearchForACustomerInCMPage
 
-    private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
-        UpdateTable();
-//        updatecombo();
-    }//GEN-LAST:event_refreshBtnMouseClicked
-
     private void table5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table5MouseClicked
-
+table5.setDefaultEditor(Object.class, null);
     }//GEN-LAST:event_table5MouseClicked
 
     private void NameToBeInsertedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameToBeInsertedActionPerformed
@@ -407,20 +398,17 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
                     return;
                 }
 
-                String sql = "UPDATE Customer SET Name = ?, Email = ? WHERE ID = ?;";
+                String sql = "UPDATE Customer4 SET Name = ?, Email = ? WHERE ID = ?;";
                 try (PreparedStatement pst = con.prepareStatement(sql)) {
                     pst.setString(1, name);
                     pst.setString(2, email);
-                    pst.setString(3, id);
-//                  we use this instead of the one above if we made the id value in the table as integer
-//                  pst.setInt(3, Integer.parseInt(id));  
+                    pst.setInt(3, Integer.parseInt(id));
+
                     int affectedRows = pst.executeUpdate();
                     if (affectedRows > 0) {
                         JOptionPane.showMessageDialog(null, "Update Successful");
                         UpdateTable();
-                        if (table5.getRowCount() > selectedRow) { // Check if the row still exists
-                            table5.setRowSelectionInterval(selectedRow, selectedRow);
-                        }
+                        updatecombo();
                     } else {
                         JOptionPane.showMessageDialog(null, "Update Failed");
                     }
@@ -428,15 +416,20 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No row selected");
         }
+        
+
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
     private void table5VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_table5VetoableChange
 
 
     }//GEN-LAST:event_table5VetoableChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+         UpdateTable();
+        updatecombo();
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void table5ValueChanged(javax.swing.event.ListSelectionEvent evt) {
         // Check if the selection is still adjusting
         if (!evt.getValueIsAdjusting()) {
@@ -494,13 +487,13 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
     private javax.swing.JTextField NameToBeInserted;
     private javax.swing.JButton UpdateBtn;
     private javax.swing.JLabel backBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel refreshBtn;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JTable table5;
     // End of variables declaration//GEN-END:variables

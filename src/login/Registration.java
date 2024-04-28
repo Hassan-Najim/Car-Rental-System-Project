@@ -65,7 +65,7 @@ public class Registration extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(148, 79, 46));
+        jPanel1.setBackground(new java.awt.Color(99, 63, 42));
         jPanel1.setForeground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
 
@@ -80,6 +80,7 @@ public class Registration extends javax.swing.JFrame {
         });
 
         btnRegister.setBackground(new java.awt.Color(255, 232, 191));
+        btnRegister.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnRegister.setText("Register");
         btnRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +93,7 @@ public class Registration extends javax.swing.JFrame {
         txtPassRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
 
         jButton1.setBackground(new java.awt.Color(255, 232, 191));
+        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setText("Exit");
         jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -101,17 +103,17 @@ public class Registration extends javax.swing.JFrame {
         });
 
         jLabel4.setBackground(java.awt.Color.white);
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(99, 63, 42));
         jLabel4.setText("Username:");
 
         jLabel5.setBackground(java.awt.Color.white);
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(99, 63, 42));
         jLabel5.setText("Password:");
 
         jLabel6.setBackground(java.awt.Color.white);
-        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(99, 63, 42));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Sign Up");
@@ -158,7 +160,7 @@ public class Registration extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

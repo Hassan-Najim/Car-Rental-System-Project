@@ -8,19 +8,20 @@ import java.awt.Image;
 import java.sql.*;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+public class Menu extends javax.swing.JFrame  {
 
-public class Menu extends javax.swing.JFrame {
-
-    Connection con = null;
+     Connection con = null;
     PreparedStatement pst = null;
-    ResultSet rs = null;
-
+    ResultSet rs = null;  
     public Menu() {
         initComponents();
-        con = DBConnection.ConnectionDB();
+        con=DBConnection.ConnectionDB();
         Image icon = new ImageIcon(this.getClass().getResource("/icon.png")).getImage();
         this.setIconImage(icon);
-
+        
+        
+        
+        
     }
 
     /**
@@ -34,14 +35,15 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jButton9 = new javax.swing.JButton();
-        customerInfoBtn = new javax.swing.JButton();
-        rentACarBtn = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Rental System");
@@ -51,6 +53,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(51, 255, 51));
 
         jButton9.setBackground(new java.awt.Color(255, 232, 191));
+        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/car info management icon.png"))); // NOI18N
         jButton9.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,24 +61,27 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        customerInfoBtn.setBackground(new java.awt.Color(255, 232, 191));
-        customerInfoBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        customerInfoBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton10.setBackground(new java.awt.Color(255, 232, 191));
+        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/customers info management icon.png"))); // NOI18N
+        jButton10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        jButton10.setDefaultCapable(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerInfoBtnActionPerformed(evt);
+                jButton10ActionPerformed(evt);
             }
         });
 
-        rentACarBtn.setBackground(new java.awt.Color(255, 232, 191));
-        rentACarBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        rentACarBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton11.setBackground(new java.awt.Color(255, 232, 191));
+        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/rent a car icon.png"))); // NOI18N
+        jButton11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rentACarBtnActionPerformed(evt);
+                jButton11ActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(97, 60, 42));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(99, 63, 42));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Main Menu");
         jLabel1.setFocusable(false);
@@ -91,40 +97,63 @@ public class Menu extends javax.swing.JFrame {
         jLabel2.setFocusable(false);
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("This system is made for blashhh ahshsdudw");
-
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("The system is made with");
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("jLabel3");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(148, 79, 46));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("This system is made for managing cars, customers as well as renting out \nthe cars in question. The user will be able to manually create a car and \nassign it to a particular customer. Additionally, the system allows you\nto make any necessary edits to a already created car or a customers \ninformation as well as delete an entry from either section. The System \nprovides simplicity yet flexibility in order to achieve maximum usage \nwhen dealing with the process of renting out a car. ");
+        jTextArea1.setToolTipText("");
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(148, 79, 46), 2, true));
+        jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTextArea1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        //jTextArea1.setBorder(null);
+        jTextArea1.setDisabledTextColor(new java.awt.Color(255, 255, 255));
+        jTextArea1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextArea1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(240, 240, 240)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -132,36 +161,38 @@ public class Menu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(customerInfoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(rentACarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
-                        .addComponent(jLabel1)))
-                .addGap(44, 44, 44))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(rentACarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(41, 41, 41)
+                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(customerInfoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -179,15 +210,14 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rentACarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentACarBtnActionPerformed
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new RentCar().setVisible(true);
             }
         });
-        this.dispose();
-
-    }//GEN-LAST:event_rentACarBtnActionPerformed
+         this.dispose();
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -198,15 +228,20 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
 
-    private void customerInfoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerInfoBtnActionPerformed
-
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new CustomersInfoManagament().setVisible(true);
             }
         });
         this.dispose();
-    }//GEN-LAST:event_customerInfoBtnActionPerformed
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTextArea1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextArea1MouseClicked
+jTextArea1.setBorder(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextArea1MouseClicked
+
 
     /**
      * @param args the command line arguments
@@ -247,15 +282,16 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton customerInfoBtn;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JButton rentACarBtn;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
