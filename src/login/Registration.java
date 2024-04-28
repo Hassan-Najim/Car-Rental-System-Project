@@ -70,7 +70,7 @@ public class Registration extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Rental System");
 
-        jPanel1.setBackground(new java.awt.Color(148, 79, 46));
+        jPanel1.setBackground(new java.awt.Color(99, 63, 42));
         jPanel1.setForeground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(400, 500));
 

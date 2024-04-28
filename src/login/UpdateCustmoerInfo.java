@@ -5,9 +5,11 @@
 package login;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -60,6 +62,8 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     public UpdateCustmoerInfo() {
         initComponents();
+        Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
+        this.setIconImage(icon);
         applyHoverEffect(UpdateBtn);
         table5.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table5.setRowSelectionAllowed(true);
@@ -96,24 +100,12 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
             }
         });
         UpdateTable();
-
     }
 
-    public void updatecombo() {
-        String sql = "select * from Customer";
-        try {
-            pst = con.prepareStatement(sql);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-//                ID2.addItem(rs.getString("ID"));
-            }
-        } catch (Exception e) {
-        }
-
-    }
+   
 
     protected void UpdateTable() {
-        String sql = "select * from Customer;";
+        String sql = "select * from Customer4;";
         try {
             pst = con.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -134,7 +126,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     public void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-        String sql = "SELECT * FROM Customer WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
+        String sql = "SELECT * FROM Customer4 WHERE ID LIKE ? OR Name LIKE ? OR Email LIKE ?;";
         try {
             pst = con.prepareStatement(sql);
             // Using % around the search text to find any matching part.
@@ -188,10 +180,11 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Car Rental System");
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(99, 63, 42));
         jLabel2.setText("Update Customer Info");
 
@@ -316,18 +309,16 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(searchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(25, 25, 25)
-                                .addComponent(NameToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(40, 40, 40)
+                        .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel8)
+                        .addGap(25, 25, 25)
+                        .addComponent(NameToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -361,7 +352,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(EmailToBeInserted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
+                        .addGap(75, 75, 75)
                         .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -393,7 +384,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         UpdateTable();
-//        updatecombo();
+
     }//GEN-LAST:event_refreshBtnMouseClicked
 
     private void table5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table5MouseClicked
@@ -410,28 +401,24 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         if (selectedRow >= 0) {
             try {
                 String id = table5.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
-                String name = NameToBeInserted.getText().trim();
-                String email = EmailToBeInserted.getText().trim();
+                String name = NameToBeInserted.getText().trim().toUpperCase();
+                String email = EmailToBeInserted.getText().trim().toUpperCase();
 
                 if (name.isEmpty() || email.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Name and Email cannot be empty");
                     return;
                 }
 
-                String sql = "UPDATE Customer SET Name = ?, Email = ? WHERE ID = ?;";
+                String sql = "UPDATE Customer4 SET Name = ?, Email = ? WHERE ID = ?;";
                 try (PreparedStatement pst = con.prepareStatement(sql)) {
                     pst.setString(1, name);
                     pst.setString(2, email);
-                    pst.setString(3, id);
-//                  we use this instead of the one above if we made the id value in the table as integer
-//                  pst.setInt(3, Integer.parseInt(id));  
+                    pst.setInt(3, Integer.parseInt(id));
+
                     int affectedRows = pst.executeUpdate();
                     if (affectedRows > 0) {
                         JOptionPane.showMessageDialog(null, "Update Successful");
                         UpdateTable();
-                        if (table5.getRowCount() > selectedRow) { // Check if the row still exists
-                            table5.setRowSelectionInterval(selectedRow, selectedRow);
-                        }
                     } else {
                         JOptionPane.showMessageDialog(null, "Update Failed");
                     }
@@ -439,8 +426,6 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No row selected");
         }
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
