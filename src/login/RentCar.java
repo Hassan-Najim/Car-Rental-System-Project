@@ -22,7 +22,6 @@ public class RentCar extends javax.swing.JFrame {
         initComponents();
         con = DBConnection.ConnectionDB();
         UpdateTable();
-        updatecombo();
         Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
         this.setIconImage(icon);
         SearchTextFieldCar.getDocument().addDocumentListener(new DocumentListener() {
@@ -63,19 +62,6 @@ public class RentCar extends javax.swing.JFrame {
 
             }
         }
-    }
-
-    private void updatecombo() {
-        String sql = "select * from Car3 where Availability = ? ;";
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setString(1, "Available");
-            rs = pst.executeQuery();
-            while (rs.next()) {
-            }
-        } catch (Exception e) {
-        }
-
     }
 
     /**

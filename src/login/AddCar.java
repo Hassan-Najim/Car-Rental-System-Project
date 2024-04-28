@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class AddCar extends javax.swing.JFrame {
     private String originalText;
- Connection con = null;
+    Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;  
     
@@ -71,11 +71,11 @@ public class AddCar extends javax.swing.JFrame {
         ManfactureYear = new javax.swing.JTextField();
         LicensePlate = new javax.swing.JTextField();
         HourlyRate = new javax.swing.JTextField();
-        AddCar = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         Color = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        AddCar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Car");
@@ -130,13 +130,6 @@ public class AddCar extends javax.swing.JFrame {
 
         HourlyRate.setHorizontalAlignment(javax.swing.JTextField.LEFT);
 
-        AddCar.setText("Add Car");
-        AddCar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddCarActionPerformed(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(97, 60, 42));
         jLabel10.setText("Add Car");
@@ -151,6 +144,17 @@ public class AddCar extends javax.swing.JFrame {
         jLabel1.setText("Color:");
 
         jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Desktop\\Database\\Login\\Images\\back button.png")); // NOI18N
+
+        AddCar.setBackground(new java.awt.Color(255, 232, 191));
+        AddCar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        AddCar.setText("Add Car");
+        AddCar.setAlignmentY(0.0F);
+        AddCar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        AddCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddCarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -196,12 +200,12 @@ public class AddCar extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(HourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(100, 100, 100)
-                                .addComponent(AddCar))
-                            .addComponent(jLabel8))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AddCar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(53, 53, 53))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,10 +244,10 @@ public class AddCar extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LicensePlate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(HourlyRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AddCar))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(AddCar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -265,59 +269,6 @@ public class AddCar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ColorActionPerformed
 
-    private void AddCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCarActionPerformed
-        // Check if any text field is empty
-    if (Type.getText().isEmpty() || Brand.getText().isEmpty() || Model.getText().isEmpty() ||
-        ManfactureYear.getText().isEmpty() || Color.getText().isEmpty() || LicensePlate.getText().isEmpty() ||
-        HourlyRate.getText().isEmpty()) {
-        // Display error message if any field is empty
-        JOptionPane.showMessageDialog(null, "All fields must be filled.", "Error", JOptionPane.ERROR_MESSAGE);
-        return; // Exit the method without adding the car to the database
-    }
-    
-    int nextID = 1; // Default starting ID
-    String idSql = "SELECT MAX(CAST(ID AS INT)) FROM Car3";
-    try (PreparedStatement pstId = con.prepareStatement(idSql);ResultSet rsId = pstId.executeQuery())
-    {
-        if (rsId.next() && rsId.getInt(1) != 0) {
-            System.out.println("from id " + rsId.getInt(1));
-            nextID = rsId.getInt(1) + 1; // Increment ID based on the highest value in the database
-        }
-    } catch (SQLException ex) { 
-        Logger.getLogger(AddCar.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    try {
-        String sql = "INSERT INTO Car3 VALUES(?,?,?,?,?,?,?,?,?,?); ";
-        pst = con.prepareStatement(sql);
-        pst.setInt(1, nextID);
-        pst.setString(2, Type.getText().toUpperCase());
-        pst.setString(3, Brand.getText().toUpperCase());
-        pst.setString(4, Model.getText().toUpperCase());
-        pst.setString(5, ManfactureYear.getText());
-        pst.setString(6, Color.getText().toUpperCase());
-        pst.setString(7, LicensePlate.getText().toUpperCase());
-        pst.setString(8, "Avialable");
-        pst.setString(9, HourlyRate.getText().toUpperCase());
-        pst.setString(10, null);
-        
-        pst.execute();
-        System.out.println("Registration Successful");
-        JOptionPane.showMessageDialog(null, "Car Successfully Added");
-    } catch(Exception e) {
-        System.out.println("Registration Unsuccessful" + e);
-        JOptionPane.showMessageDialog(null, "Error");
-    } finally {
-        try {
-            rs.close();
-            pst.close();
-        } catch(Exception e) {
-            // Handle exception
-        }
-    }
-
-    }//GEN-LAST:event_AddCarActionPerformed
-
     private void ManfactureYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManfactureYearActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ManfactureYearActionPerformed
@@ -337,6 +288,54 @@ public class AddCar extends javax.swing.JFrame {
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         JOptionPane.showMessageDialog(this, "Licene plate Example: 12 AS 1234");
     }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void AddCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCarActionPerformed
+        int nextID = 1; // Default starting ID
+        String idSql = "SELECT MAX(CAST(ID AS INT)) FROM Car3";
+        try (PreparedStatement pstId = con.prepareStatement(idSql);
+            ResultSet rsId = pstId.executeQuery())
+        {
+            if (rsId.next() && rsId.getInt(1) != 0) {
+                System.out.println("from id " + rsId.getInt(1));
+                nextID = rsId.getInt(1) + 1; // Increment ID based on the highest value in the database
+            }
+        }       catch (SQLException ex) {
+            Logger.getLogger(AddCar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try{
+            String sql = "INSERT INTO Car3 VALUES(?,?,?,?,?,?,?,?,?,?); ";
+            pst = con.prepareStatement(sql);
+            pst.setInt(1, nextID);
+            pst.setString(2,Type.getText());
+            pst.setString(3,Brand.getText());
+            pst.setString(4,Model.getText());
+            pst.setString(5,ManfactureYear.getText());
+            pst.setString(6, Color.getText());
+            pst.setString(7,LicensePlate.getText());
+            pst.setString(8, "Avialable");
+            pst.setString(9, HourlyRate.getText());
+            pst.setString(10, null);
+
+            pst.execute();
+            System.out.println("Registration Successfull");
+            JOptionPane.showMessageDialog(null, "Car Successfully Added");
+        }
+        catch(Exception e){
+            System.out.println("Registration UnSuccessfull" + e);
+            JOptionPane.showMessageDialog(null, "Error");
+        }
+        finally{
+            try{
+                rs.close();
+                pst.close();
+
+            }
+            catch(Exception e){
+
+            }
+        }
+    }//GEN-LAST:event_AddCarActionPerformed
 
     /**
      * @param args the command line arguments
