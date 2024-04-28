@@ -224,7 +224,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
     });
 
     jButton6.setBackground(new java.awt.Color(244, 235, 218));
-    jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Downloads\\Mohamed-Latest-Changes\\SOFTWARE-CONSTRUCTION-Project-Main2-bug fixing\\src\\login\\back_button.png")); // NOI18N
+    jButton6.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Downloads\\Mohamed-Latest-Changes\\SOFTWARE-CONSTRUCTION-Project-Main2-bug fixing\\Images\\back button.png")); // NOI18N
     jButton6.setBorderPainted(false);
     jButton6.setContentAreaFilled(false);
     jButton6.setFocusPainted(false);
@@ -284,7 +284,7 @@ public class CarInfoManagement extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jButton6)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
