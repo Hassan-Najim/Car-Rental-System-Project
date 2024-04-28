@@ -345,7 +345,7 @@
               <Color blue="da" green="eb" red="f4" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\hassa\Downloads\Mohamed-Latest-Changes\SOFTWARE-CONSTRUCTION-Project-Main2-bug fixing\Images\back button.png"/>
+              <Image iconType="3" name="/Images/back button.png"/>
             </Property>
             <Property name="borderPainted" type="boolean" value="false"/>
             <Property name="contentAreaFilled" type="boolean" value="false"/>

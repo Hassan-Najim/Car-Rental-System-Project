@@ -85,7 +85,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         CarsInfoManagement.setBackground(new java.awt.Color(255, 232, 191));
-        CarsInfoManagement.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Documents\\GitHub\\SOFTWARE-CONSTRUCTION-Project\\Images\\car info management icon.png")); // NOI18N
+        CarsInfoManagement.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/car info management icon.png"))); // NOI18N
         CarsInfoManagement.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         CarsInfoManagement.setFocusable(false);
         CarsInfoManagement.setPreferredSize(new java.awt.Dimension(54, 54));
@@ -96,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         CustomerInfoManagment.setBackground(new java.awt.Color(255, 232, 191));
-        CustomerInfoManagment.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Documents\\GitHub\\SOFTWARE-CONSTRUCTION-Project\\Images\\customers info management icon.png")); // NOI18N
+        CustomerInfoManagment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/customers info management icon.png"))); // NOI18N
         CustomerInfoManagment.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         CustomerInfoManagment.setFocusable(false);
         CustomerInfoManagment.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class Menu extends javax.swing.JFrame {
 
         RentCar.setBackground(new java.awt.Color(255, 232, 191));
         RentCar.setForeground(new java.awt.Color(0, 0, 0));
-        RentCar.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Documents\\GitHub\\SOFTWARE-CONSTRUCTION-Project\\Images\\MainMenuRentIcon.png")); // NOI18N
+        RentCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MainMenuRentIcon.png"))); // NOI18N
         RentCar.setText(" ");
         RentCar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         RentCar.setFocusable(false);
