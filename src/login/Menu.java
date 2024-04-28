@@ -156,7 +156,7 @@ public class Menu extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("and the ability to add, remove, and update car and customer information.");
 
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\hassa\\Documents\\GitHub\\SOFTWARE-CONSTRUCTION-Project\\Images\\MainMenuIcon.png")); // NOI18N
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MainMenuIcon.png"))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(116, 64, 39));
         jButton1.setForeground(new java.awt.Color(204, 204, 204));

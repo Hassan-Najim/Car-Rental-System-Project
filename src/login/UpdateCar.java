@@ -90,18 +90,18 @@ Connection con = null;
                     Object ManfactureYear = table3.getValueAt(selectedRow, 4);
                     Object Color = table3.getValueAt(selectedRow, 5);
                     Object LicensePlate = table3.getValueAt(selectedRow, 6);
- 
+                    Object Availablity = table3.getValueAt(selectedRow, 7);
                     Object HourRate = table3.getValueAt(selectedRow, 8);
-                    Object CustomerRenter = table3.getValueAt(selectedRow, 9);
+                    String CustomerRenter = (String) table3.getValueAt(selectedRow, 9);
                     TypeField.setText(Type.toString());
                     BrandField.setText(Brand.toString());
                     ModelField.setText(Model.toString());
                     ManuYearField.setText(ManfactureYear.toString());
                     ColorField.setText(Color.toString());
                     LicensePlateField.setText(LicensePlate.toString());
-                    AvailabilityField.getSelectedItem().toString();
+                    AvailabilityField.setSelectedItem(Availablity);
                     HourlyRateField.setText(HourRate.toString());
-                    CustomerField.setText(CustomerRenter.toString());
+                    CustomerField.setText(CustomerRenter);
                 }
             }
         }
