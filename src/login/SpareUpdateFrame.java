@@ -21,14 +21,13 @@ import net.proteanit.sql.DbUtils;
 
 /**
  *
- * @author hassa
+ * @author moeja
  */
-public class UpdateCar extends javax.swing.JFrame {
-
-   Connection con = null;
+public class SpareUpdateFrame extends javax.swing.JFrame {
+Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
+  
     
     
     private void applyHoverEffect(JButton button) {
@@ -45,11 +44,10 @@ public class UpdateCar extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    
-    
-    public UpdateCar() {
+    /**
+     * Creates new form UpdateCar
+     */
+    public SpareUpdateFrame() {
         initComponents();
  
            Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
@@ -110,6 +108,7 @@ public class UpdateCar extends javax.swing.JFrame {
     });
         UpdateTable();
     }
+    
     
     public void UpdateTable(){
         String sql = "select * from Car3;";
@@ -177,6 +176,9 @@ public class UpdateCar extends javax.swing.JFrame {
             }
         }
     }
+  
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -218,7 +220,6 @@ public class UpdateCar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Car Rental System");
-        setPreferredSize(new java.awt.Dimension(1182, 480));
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
@@ -337,6 +338,7 @@ public class UpdateCar extends javax.swing.JFrame {
             }
         });
 
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/login/back_button.png"))); // NOI18N
         backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 backBtnMouseClicked(evt);
@@ -464,7 +466,7 @@ public class UpdateCar extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addComponent(update)
                         .addGap(9, 9, 9)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -480,103 +482,106 @@ public class UpdateCar extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ModelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ModelFieldActionPerformed
-
-    private void TypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TypeFieldActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
 
         int selectedRow = table3.getSelectedRow();
-        if (selectedRow >= 0) {
-            try {
-                String id = table3.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
-                String Type = TypeField.getText().trim().toUpperCase();
-                String Brand = BrandField.getText().trim().toUpperCase();
-                String Model = ModelField.getText().trim().toUpperCase();
-                String ManufactureYear = ManuYearField.getText().trim().toUpperCase();
-                String Color = ColorField.getText().trim().toUpperCase();
-                String LicensePlate = LicensePlateField.getText().trim().toUpperCase();
-                String Availability = AvailabilityField.getSelectedItem().toString().trim().toUpperCase();
-                String HourRate = HourlyRateField.getText().trim().toUpperCase();
-                String CustomerRenter = CustomerField.getText().trim().toUpperCase();
+    if (selectedRow >= 0) {
+        try {
+            String id = table3.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
+            String Type = TypeField.getText().trim().toUpperCase(); 
+            String Brand = BrandField.getText().trim().toUpperCase(); 
+            String Model = ModelField.getText().trim().toUpperCase();
+            String ManufactureYear = ManuYearField.getText().trim().toUpperCase();
+            String Color = ColorField.getText().trim().toUpperCase(); 
+            String LicensePlate = LicensePlateField.getText().trim().toUpperCase();
+            String Availability = AvailabilityField.getSelectedItem().toString().trim().toUpperCase(); 
+            String HourRate = HourlyRateField.getText().trim().toUpperCase(); 
+            String CustomerRenter = CustomerField.getText().trim().toUpperCase();
 
-                if (Type.isEmpty() || Brand.isEmpty() || Model.isEmpty() || ManufactureYear.isEmpty()
-                    || Color.isEmpty() || LicensePlate.isEmpty() || Availability.isEmpty() || HourRate.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "All Fields Must Be Full");
-                    return;
-                }
-
-                String sql = "UPDATE Car3 SET "
-                + "Type = ?, "
-                + "Brand = ?, "
-                + "Model = ?, "
-                + "ManufactureYear = ?,"
-                + "Color = ?, "
-                + "LicensePlate = ?, "
-                + "Availability = ?, "
-                + "HourlyRate = ?, "
-                + "CustomerRenter = ? "
-                + "WHERE ID = ?";
-                try (PreparedStatement pst = con.prepareStatement(sql)) {
-                    pst.setString(1, Type);
-                    pst.setString(2, Brand);
-                    pst.setString(3, Model);
-                    pst.setString(4, ManufactureYear);
-                    pst.setString(5, Color);
-                    pst.setString(6, LicensePlate);
-                    pst.setString(7, Availability);
-                    pst.setString(8, HourRate);
-                    pst.setString(9, CustomerRenter);
-                    pst.setString(10, id);
-
-                    int affectedRows = pst.executeUpdate();
-                    if (affectedRows > 0) {
-                        JOptionPane.showMessageDialog(null, "Update Successful");
-                        UpdateTable();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Update Failed");
-                    }
-                }
-            } catch (SQLException ex) {
-                JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
+            if (Type.isEmpty() || Brand.isEmpty() || Model.isEmpty() || ManufactureYear.isEmpty()
+                || Color.isEmpty() || LicensePlate.isEmpty() || Availability.isEmpty() || HourRate.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "All Fields Must Be Full");
+                return;
             }
-        }
-        else {
-            JOptionPane.showMessageDialog(null, "No row selected");
-        }
 
+            String sql = "UPDATE Car3 SET "
+           + "Type = ?, "
+           + "Brand = ?, "
+           + "Model = ?, " 
+           + "ManufactureYear = ?,"
+           + "Color = ?, "
+           + "LicensePlate = ?, "
+           + "Availability = ?, "
+           + "HourlyRate = ?, "
+           + "CustomerRenter = ? "
+           + "WHERE ID = ?";
+            try (PreparedStatement pst = con.prepareStatement(sql)) {
+                 pst.setString(1, Type);
+                 pst.setString(2, Brand);
+                 pst.setString(3, Model);
+                 pst.setString(4, ManufactureYear);
+                 pst.setString(5, Color);
+                 pst.setString(6, LicensePlate);
+                 pst.setString(7, Availability);
+                 pst.setString(8, HourRate);
+                 pst.setString(9, CustomerRenter);
+                 pst.setString(10, id);
+
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    JOptionPane.showMessageDialog(null, "Update Successful");
+                    UpdateTable();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Update Failed");
+                }
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
+        } 
+    }
+    else {
+        JOptionPane.showMessageDialog(null, "No row selected");
+    }
+
+ 
     }//GEN-LAST:event_updateActionPerformed
+
+    private void TypeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TypeFieldActionPerformed
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
 
     }//GEN-LAST:event_table3MouseClicked
 
     private void table3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_table3KeyReleased
-
+          
+     
     }//GEN-LAST:event_table3KeyReleased
-
-    private void table3VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_table3VetoableChange
-        // TODO add your handling code here:
-    }//GEN-LAST:event_table3VetoableChange
 
     private void ManuYearFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManuYearFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ManuYearFieldActionPerformed
 
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        UpdateTable();
+        
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void ModelFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModelFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ModelFieldActionPerformed
+
     private void AvailabilityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AvailabilityFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AvailabilityFieldActionPerformed
 
-    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
-        UpdateTable();
-
-    }//GEN-LAST:event_jLabel12MouseClicked
+    private void table3VetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_table3VetoableChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_table3VetoableChange
 
     private void backBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseClicked
         this.dispose();
@@ -599,13 +604,13 @@ public class UpdateCar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpareUpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpareUpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpareUpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateCar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SpareUpdateFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -613,7 +618,7 @@ public class UpdateCar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UpdateCar().setVisible(true);
+                new SpareUpdateFrame().setVisible(true);
             }
         });
     }
@@ -648,4 +653,5 @@ public class UpdateCar extends javax.swing.JFrame {
     private javax.swing.JTable table3;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
+  
 }
