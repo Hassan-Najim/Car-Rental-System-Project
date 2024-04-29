@@ -345,6 +345,7 @@ public class AddCar extends javax.swing.JFrame {
             pst.execute();
             System.out.println("Registration Successfull");
             JOptionPane.showMessageDialog(null, "Car Successfully Added");
+            this.dispose();
         }
         catch(Exception e){
             System.out.println("Registration UnSuccessfull" + e);
