@@ -323,7 +323,7 @@ public class RentCar extends javax.swing.JFrame {
             String customerName = rs.getString("ID");
             
             // Update the Car3 table to assign the car to the customer
-            String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = NULL WHERE ID = ?";
+            String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = 'Not Available' WHERE ID = ?";
             pst = con.prepareStatement(updateSql);
             pst.setString(1, customerName);
             pst.setString(2, carID);
