@@ -256,11 +256,7 @@ Connection con = null;
                 table3KeyReleased(evt);
             }
         });
-        table3.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                table3VetoableChange(evt);
-            }
-        });
+
         jScrollPane1.setViewportView(table3);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -305,11 +301,7 @@ Connection con = null;
         update.setFocusPainted(false);
         update.setFocusable(false);
         update.setPreferredSize(new java.awt.Dimension(82, 32));
-        update.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                updateMouseClicked(evt);
-            }
-        });
+        
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
