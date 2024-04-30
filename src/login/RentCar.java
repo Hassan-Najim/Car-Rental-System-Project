@@ -142,7 +142,7 @@ public class RentCar extends javax.swing.JFrame {
             });
             jScrollPane1.setViewportView(table3);
 
-            jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+            jLabel9.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
             jLabel9.setForeground(new java.awt.Color(99, 63, 42));
             jLabel9.setText("Enter Customer ID :");
 
@@ -168,7 +168,7 @@ public class RentCar extends javax.swing.JFrame {
                 }
             });
 
-            jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+            jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
             jLabel3.setForeground(new java.awt.Color(99, 63, 42));
             jLabel3.setText("Enter Car ID :");
 
@@ -214,7 +214,7 @@ public class RentCar extends javax.swing.JFrame {
                 }
             });
 
-            jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+            jLabel2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
             jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Search Icon.png"))); // NOI18N
             jLabel2.setText("  Search Bar");
 
@@ -243,8 +243,8 @@ public class RentCar extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(410, 410, 410)
                                     .addComponent(jLabel5)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(SearchTextFieldCar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -351,7 +351,8 @@ public class RentCar extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
         }
-    }
+    } 
+         
 
     }//GEN-LAST:event_RentCarButtonActionPerformed
 

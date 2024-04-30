@@ -198,6 +198,7 @@ public class LoginTable1 extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
         btnLogin2.setBackground(new java.awt.Color(255, 232, 191));
+        btnLogin2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnLogin2.setText("Login");
         btnLogin2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         btnLogin2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,7 +215,6 @@ public class LoginTable1 extends javax.swing.JFrame {
             }
         });
 
-        txtUser.setBackground(new java.awt.Color(255, 232, 191));
         txtUser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         txtUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,6 +223,7 @@ public class LoginTable1 extends javax.swing.JFrame {
         });
 
         btnExit.setBackground(new java.awt.Color(255, 232, 191));
+        btnExit.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnExit.setText("Exit");
         btnExit.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,16 +240,18 @@ public class LoginTable1 extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Don't have an account?");
 
         jLabel4.setBackground(java.awt.Color.white);
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(99, 63, 42));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Login");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnRegister.setBackground(new java.awt.Color(255, 232, 191));
+        btnRegister.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         btnRegister.setText("Register");
         btnRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         btnRegister.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +260,6 @@ public class LoginTable1 extends javax.swing.JFrame {
             }
         });
 
-        txtPass.setBackground(new java.awt.Color(255, 232, 191));
         txtPass.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(99, 63, 42), 2, true));
         txtPass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,12 +268,12 @@ public class LoginTable1 extends javax.swing.JFrame {
         });
 
         jLabel2.setBackground(java.awt.Color.white);
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(99, 63, 42));
         jLabel2.setText("Password:");
 
         jLabel1.setBackground(java.awt.Color.white);
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(99, 63, 42));
         jLabel1.setText("Username:");
 
@@ -282,7 +284,6 @@ public class LoginTable1 extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPass, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
@@ -294,15 +295,18 @@ public class LoginTable1 extends javax.swing.JFrame {
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLogin2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)))
                 .addGap(119, 119, 119))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(23, 23, 23)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)

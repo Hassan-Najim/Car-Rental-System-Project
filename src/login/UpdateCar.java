@@ -256,7 +256,7 @@ Connection con = null;
                 table3KeyReleased(evt);
             }
         });
-
+      
         jScrollPane1.setViewportView(table3);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -276,7 +276,7 @@ Connection con = null;
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Search Icon.png"))); // NOI18N
         jLabel11.setText("  Search Bar");
 
@@ -301,7 +301,7 @@ Connection con = null;
         update.setFocusPainted(false);
         update.setFocusable(false);
         update.setPreferredSize(new java.awt.Dimension(82, 32));
-        
+      
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
@@ -328,6 +328,7 @@ Connection con = null;
         jPanel3.setBackground(new java.awt.Color(244, 235, 218));
         jPanel3.setLayout(new java.awt.GridLayout(9, 2, 5, 10));
 
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Type:");
         jPanel3.add(jLabel2);
 
@@ -338,10 +339,12 @@ Connection con = null;
         });
         jPanel3.add(TypeField);
 
+        jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setText("Brand:");
         jPanel3.add(jLabel3);
         jPanel3.add(BrandField);
 
+        jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel4.setText("Model:");
         jPanel3.add(jLabel4);
 
@@ -352,17 +355,21 @@ Connection con = null;
         });
         jPanel3.add(ModelField);
 
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel5.setText("Color:");
         jPanel3.add(jLabel5);
         jPanel3.add(ColorField);
 
+        jLabel6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel6.setText("License Plate#: ");
         jPanel3.add(jLabel6);
         jPanel3.add(LicensePlateField);
 
+        jLabel7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel7.setText("Availability:");
         jPanel3.add(jLabel7);
 
+        AvailabilityField.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         AvailabilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
         AvailabilityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -371,10 +378,12 @@ Connection con = null;
         });
         jPanel3.add(AvailabilityField);
 
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel8.setText("Hourly Rate:");
         jPanel3.add(jLabel8);
         jPanel3.add(HourlyRateField);
 
+        jLabel10.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel10.setText("Manufacture Year:");
         jPanel3.add(jLabel10);
 
@@ -385,6 +394,7 @@ Connection con = null;
         });
         jPanel3.add(ManuYearField);
 
+        jLabel9.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel9.setText("Current Renter:");
         jPanel3.add(jLabel9);
         jPanel3.add(CustomerField);
@@ -413,8 +423,8 @@ Connection con = null;
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(109, 109, 109)
                                 .addComponent(jLabel12)
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(SearchTextFieldCarUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(40, 40, 40)))
@@ -565,11 +575,22 @@ Connection con = null;
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
+            } finally{
+            try{
+                rs.close();
+                pst.close();
+
             }
+            catch(Exception e){
+
+            }
+        }
         }
         else {
             JOptionPane.showMessageDialog(null, "No row selected");
         }
+        
+        
     }//GEN-LAST:event_updateActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

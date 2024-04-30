@@ -271,7 +271,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Search Icon.png"))); // NOI18N
         jLabel11.setText("  Search Bar");
 
@@ -424,8 +424,17 @@ table5.setDefaultEditor(Object.class, null);
                 }
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error updating record: " + ex.getMessage());
+            } finally{
+            try{
+                rs.close();
+                pst.close();
+
+            }
+            catch(Exception e){
+
             }
         }
+        } 
         
 
     }//GEN-LAST:event_UpdateBtnActionPerformed

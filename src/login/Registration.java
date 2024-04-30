@@ -77,7 +77,6 @@ public class Registration extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(244, 235, 218));
 
-        txtUserRegister.setBackground(new java.awt.Color(255, 232, 191));
         txtUserRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
         txtUserRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +94,6 @@ public class Registration extends javax.swing.JFrame {
             }
         });
 
-        txtPassRegister.setBackground(new java.awt.Color(255, 232, 191));
         txtPassRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
 
         jButton1.setBackground(new java.awt.Color(255, 232, 191));
