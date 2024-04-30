@@ -349,7 +349,7 @@ public class AddCar extends javax.swing.JFrame {
         }
         catch(Exception e){
             System.out.println("Registration UnSuccessfull" + e);
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
         }
         finally{
             try{
