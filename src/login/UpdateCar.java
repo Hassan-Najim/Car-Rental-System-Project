@@ -256,7 +256,7 @@ Connection con = null;
                 table3KeyReleased(evt);
             }
         });
-
+        
         jScrollPane1.setViewportView(table3);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -363,7 +363,7 @@ Connection con = null;
         jLabel7.setText("Availability:");
         jPanel3.add(jLabel7);
 
-        AvailabilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
+        AvailabilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Rented" }));
         AvailabilityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AvailabilityFieldActionPerformed(evt);
