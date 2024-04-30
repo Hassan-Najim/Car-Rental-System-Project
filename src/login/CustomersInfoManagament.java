@@ -204,7 +204,7 @@ public class CustomersInfoManagament extends javax.swing.JFrame {
         jLabel4.setText("Customer Managment");
 
         CustomerTable.setBackground(new java.awt.Color(255, 232, 191));
-        CustomerTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        CustomerTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 1, true));
         CustomerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         table5.setFont(new java.awt.Font("Arial", 0, 12));

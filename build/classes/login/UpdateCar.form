@@ -143,7 +143,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder thickness="2">
+                <LineBorder roundedCorners="true">
                   <Color PropertyName="color" blue="2a" green="3c" red="61" type="rgb"/>
                 </LineBorder>
               </Border>
@@ -441,7 +441,7 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
                     <StringItem index="0" value="Available"/>
-                    <StringItem index="1" value="Not Available"/>
+                    <StringItem index="1" value="Rented"/>
                   </StringArray>
                 </Property>
               </Properties>

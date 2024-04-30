@@ -223,7 +223,7 @@ Connection con = null;
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(97, 60, 42), 2));
+        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 1, true));
 
         table3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -256,7 +256,7 @@ Connection con = null;
                 table3KeyReleased(evt);
             }
         });
-      
+        
         jScrollPane1.setViewportView(table3);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -301,7 +301,7 @@ Connection con = null;
         update.setFocusPainted(false);
         update.setFocusable(false);
         update.setPreferredSize(new java.awt.Dimension(82, 32));
-      
+        
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateActionPerformed(evt);
@@ -370,7 +370,7 @@ Connection con = null;
         jPanel3.add(jLabel7);
 
         AvailabilityField.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        AvailabilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available" }));
+        AvailabilityField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Rented" }));
         AvailabilityField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AvailabilityFieldActionPerformed(evt);

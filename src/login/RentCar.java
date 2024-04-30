@@ -97,7 +97,7 @@ public class RentCar extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(244, 235, 218));
 
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(97, 60, 42), 2));
+        jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 1, true));
 
         table3.setForeground(new java.awt.Color(99, 63, 42));
         table3.setModel(new javax.swing.table.DefaultTableModel(

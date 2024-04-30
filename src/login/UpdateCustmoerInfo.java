@@ -203,7 +203,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         jLabel2.setText("Update Customer Info");
 
         CustomerTable.setBackground(new java.awt.Color(255, 232, 191));
-        CustomerTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        CustomerTable.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 1, true));
         CustomerTable.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
 
         table5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -238,7 +238,7 @@ public class UpdateCustmoerInfo extends javax.swing.JFrame {
         EmailToBeInserted.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
 
         UpdateBtn.setBackground(new java.awt.Color(255, 232, 191));
-        UpdateBtn.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        UpdateBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         UpdateBtn.setText("Update");
         UpdateBtn.setAlignmentY(0.0F);
         UpdateBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(97, 60, 42), 2));
