@@ -409,7 +409,7 @@ table5.setDefaultEditor(Object.class, null);
 
                 String sql = "UPDATE Customer4 SET Name = ?, Email = ? WHERE ID = ?;";
                 try (PreparedStatement pst = con.prepareStatement(sql)) {
-                    pst.setString(1, name);
+                    pst.setString(1, name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase());
                     pst.setString(2, email);
                     pst.setInt(3, Integer.parseInt(id));
 

@@ -41,7 +41,7 @@ public class AddACustomer extends javax.swing.JFrame {
 
     public AddACustomer() {
         initComponents();
-        applyHoverEffect(jButton1);
+        applyHoverEffect(AddCustomer);
         applyHoverEffect(jButton2);
 
         setTitle("Register a Customer");
@@ -67,7 +67,7 @@ public class AddACustomer extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        AddCustomer = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -101,13 +101,13 @@ public class AddACustomer extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(99, 63, 42));
         jLabel1.setText("Customer Name:");
 
-        jButton1.setBackground(new java.awt.Color(255, 232, 191));
-        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jButton1.setText("Add Customer");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        AddCustomer.setBackground(new java.awt.Color(255, 232, 191));
+        AddCustomer.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        AddCustomer.setText("Add Customer");
+        AddCustomer.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
+        AddCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AddCustomerActionPerformed(evt);
             }
         });
 
@@ -139,7 +139,7 @@ public class AddACustomer extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -174,7 +174,7 @@ public class AddACustomer extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
@@ -197,7 +197,7 @@ public class AddACustomer extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddCustomerActionPerformed
      
              try {
             // Check for empty fields
@@ -220,10 +220,12 @@ public class AddACustomer extends javax.swing.JFrame {
 
             // Insert data
             String sql = "INSERT INTO Customer4(ID, Name, Email) VALUES(?,?,?);";
+            String CustomerName = txtCustomer.getText().trim();
+            String CutsomerEmail = txtEmail.getText().trim();
             try (PreparedStatement pst = con.prepareStatement(sql)) {
                 pst.setInt(1, nextId);
-                pst.setString(2, txtCustomer.getText().trim());
-                pst.setString(3, txtEmail.getText().trim());
+                pst.setString(2, CustomerName.substring(0, 1).toUpperCase() + CustomerName.substring(1).toLowerCase());
+                pst.setString(3, CutsomerEmail);
                 pst.executeUpdate();
                 con.commit();
                 JOptionPane.showMessageDialog(null, "Registration Successful");
@@ -248,7 +250,7 @@ public class AddACustomer extends javax.swing.JFrame {
             this.dispose();
 
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddCustomerActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
@@ -293,7 +295,7 @@ public class AddACustomer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton AddCustomer;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
