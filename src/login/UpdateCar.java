@@ -524,6 +524,7 @@ public class UpdateCar extends javax.swing.JFrame {
         if (selectedRow >= 0) {
             try {
                 String id = table3.getModel().getValueAt(selectedRow, 0).toString(); // Assuming ID is in column 0
+            
                 String Type = TypeField.getText().trim();
                 String Brand = BrandField.getText().trim();
                 String Model = ModelField.getText().trim();
@@ -544,7 +545,15 @@ public class UpdateCar extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "All Fields Must Be Full");
                     return;
                 }
-                
+                 String customerCheckQuery = "SELECT * FROM Customer4 WHERE ID = ?";
+        try (PreparedStatement customerCheckStmt = con.prepareStatement(customerCheckQuery)) {
+            customerCheckStmt.setString(1, CustomerRenter);
+            ResultSet customerCheckResult = customerCheckStmt.executeQuery();
+            if (!customerCheckResult.next()) {
+                JOptionPane.showMessageDialog(null, "Customer ID does not exist in the database");
+                return;
+            }
+        }
                 String sql = "UPDATE Car3 SET "
                         + "Type = ?, "
                         + "Brand = ?, "
