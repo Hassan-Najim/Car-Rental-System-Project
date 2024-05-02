@@ -22,12 +22,11 @@ public class RentCar extends javax.swing.JFrame {
         initComponents();
         con = DBConnection.ConnectionDB();
         UpdateTable();
-        
+
         setTitle("Rent Car");
         Image icon = new ImageIcon(this.getClass().getResource("/Program Logo.png")).getImage();
         this.setIconImage(icon);
-        
-        
+
         SearchTextFieldCar.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -45,7 +44,6 @@ public class RentCar extends javax.swing.JFrame {
             }
         });
     }
-    
 
     private void UpdateTable() {
         String sql = "select * from Car3 where Availability = ? ;";
@@ -309,50 +307,50 @@ public class RentCar extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void RentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarButtonActionPerformed
-         try {
-        // Check if the entered customer ID exists in the Customer4 table
-        String customerID = Customer.getText();
-        String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
-        pst = con.prepareStatement(customerQuery);
-        pst.setString(1, customerID);
-        rs = pst.executeQuery();
-
-        // If the customer ID exists, proceed to update the Car3 table
-        if (rs.next()) {
-            String carID = id.getText();
-            String customerName = rs.getString("ID");
-            
-            // Update the Car3 table to assign the car to the customer
-            String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = 'Rented' WHERE ID = ?";
-            pst = con.prepareStatement(updateSql);
-            pst.setString(1, customerName);
-            pst.setString(2, carID);
-            int rows = pst.executeUpdate();
-            UpdateTable();
-
-            if (rows > 0) {
-                JOptionPane.showMessageDialog(null, "Customer Added Successfully");
-            } else {
-                JOptionPane.showMessageDialog(null, "Error. Customer Does Not Exist");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Error. Customer ID does not exist.");
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-    } finally {
         try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (pst != null) {
-                pst.close();
+            // Check if the entered customer ID exists in the Customer4 table
+            String customerID = Customer.getText();
+            String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
+            pst = con.prepareStatement(customerQuery);
+            pst.setString(1, customerID);
+            rs = pst.executeQuery();
+
+            // If the customer ID exists, proceed to update the Car3 table
+            if (rs.next()) {
+                String carID = id.getText();
+                String customerName = rs.getString("ID");
+
+                // Update the Car3 table to assign the car to the customer
+                String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = 'Rented' WHERE ID = ?";
+                pst = con.prepareStatement(updateSql);
+                pst.setString(1, customerName);
+                pst.setString(2, carID);
+                int rows = pst.executeUpdate();
+                UpdateTable();
+
+                if (rows > 0) {
+                    JOptionPane.showMessageDialog(null, "Customer Added Successfully");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error. Customer Does Not Exist");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Error. Customer ID does not exist.");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
         }
-    } 
-         
+
 
     }//GEN-LAST:event_RentCarButtonActionPerformed
 
@@ -361,7 +359,7 @@ public class RentCar extends javax.swing.JFrame {
     }//GEN-LAST:event_table3KeyReleased
 
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
-table3.setDefaultEditor(Object.class, null);
+        table3.setDefaultEditor(Object.class, null);
         int row = table3.getSelectedRow();
         String selection = table3.getModel().getValueAt(row, 0).toString();
         String sql = "select * from Car3 where ID =" + selection;
@@ -380,8 +378,15 @@ table3.setDefaultEditor(Object.class, null);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
+        } finally {
+            try {
+                rs.close();
+                pst.close();
+            } catch (Exception e) {
+            }
+
         }
-                   
+
     }//GEN-LAST:event_table3MouseClicked
 
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
@@ -398,13 +403,13 @@ table3.setDefaultEditor(Object.class, null);
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-jButton1.setBorderPainted(false);// TODO add your handling code here:
-java.awt.EventQueue.invokeLater(new Runnable() {
+        jButton1.setBorderPainted(false);// TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
             }
         });
- this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -467,40 +472,40 @@ java.awt.EventQueue.invokeLater(new Runnable() {
 
     private void updateTableWithSearchFilter(String toSearch) {
         // Use LIKE for partial matches on each key release.
-    String sql = "SELECT * FROM Car3 WHERE (ID LIKE ?"
-            + " OR Type LIKE ?"
-            + " OR Brand LIKE ?"
-            + " OR Model LIKE ?"
-            + " OR ManufactureYear LIKE ?"
-            + " OR Color LIKE ?"
-            + " OR LicensePlate LIKE ?"
-            + " OR HourlyRate LIKE ?"
-            + " OR CustomerRenter LIKE ?)"
-            + " AND Availability = 'Available';";
-    try {
-        pst = con.prepareStatement(sql);
-        // Using % around the search text to find any matching part.
-        for (int i = 1; i <= 9; i++) {
-            pst.setString(i, "%" + toSearch + "%");
-        }
-        rs = pst.executeQuery();
-        // Set the table model using DbUtils; this handles empty result sets as well.
-        table3.setModel(DbUtils.resultSetToTableModel(rs));
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
-    } finally {
+        String sql = "SELECT * FROM Car3 WHERE (ID LIKE ?"
+                + " OR Type LIKE ?"
+                + " OR Brand LIKE ?"
+                + " OR Model LIKE ?"
+                + " OR ManufactureYear LIKE ?"
+                + " OR Color LIKE ?"
+                + " OR LicensePlate LIKE ?"
+                + " OR HourlyRate LIKE ?"
+                + " OR CustomerRenter LIKE ?)"
+                + " AND Availability = 'Available';";
         try {
-            // Ensure resources are closed.
-            if (rs != null) {
-                rs.close();
+            pst = con.prepareStatement(sql);
+            // Using % around the search text to find any matching part.
+            for (int i = 1; i <= 9; i++) {
+                pst.setString(i, "%" + toSearch + "%");
             }
-            if (pst != null) {
-                pst.close();
-            }
+            rs = pst.executeQuery();
+            // Set the table model using DbUtils; this handles empty result sets as well.
+            table3.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Error during search: " + e.getMessage());
+        } finally {
+            try {
+                // Ensure resources are closed.
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pst != null) {
+                    pst.close();
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
+            }
         }
     }
-}
 
 }
