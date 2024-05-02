@@ -46,24 +46,18 @@ public class RentCar extends javax.swing.JFrame {
     }
 
     private void UpdateTable() {
-        String sql = "select * from Car3 where Availability = ? ;";
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setString(1, "Available");
-            rs = pst.executeQuery();
+        String sql = "select * from Car3 where Availability = ?;";
+    try (Connection con = DBConnection.ConnectionDB();
+         PreparedStatement pst = con.prepareStatement(sql)) {
+
+        pst.setString(1, "Available");
+        try (ResultSet rs = pst.executeQuery()) {
             table3.setModel(DbUtils.resultSetToTableModel(rs));
+        } // ResultSet is auto-closed here
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, e);
+    }
 
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        } finally {
-            try {
-                rs.close();
-                pst.close();
-
-            } catch (Exception e) {
-
-            }
-        }
     }
 
     /**
@@ -307,49 +301,38 @@ public class RentCar extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void RentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarButtonActionPerformed
-        try {
-            // Check if the entered customer ID exists in the Customer4 table
-            String customerID = Customer.getText();
-            String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
-            pst = con.prepareStatement(customerQuery);
-            pst.setString(1, customerID);
-            rs = pst.executeQuery();
+         String customerID = Customer.getText();
+    String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
+    String carID = id.getText();
+    String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = 'Rented' WHERE ID = ?";
 
-            // If the customer ID exists, proceed to update the Car3 table
+    try (Connection con = DBConnection.ConnectionDB();
+         PreparedStatement pst1 = con.prepareStatement(customerQuery);
+         PreparedStatement pst2 = con.prepareStatement(updateSql)) {
+
+        // First check customer exists
+        pst1.setString(1, customerID);
+        try (ResultSet rs = pst1.executeQuery()) {
             if (rs.next()) {
-                String carID = id.getText();
-                String customerName = rs.getString("ID");
-
-                // Update the Car3 table to assign the car to the customer
-                String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = 'Rented' WHERE ID = ?";
-                pst = con.prepareStatement(updateSql);
-                pst.setString(1, customerName);
-                pst.setString(2, carID);
-                int rows = pst.executeUpdate();
+                // Now assign the car to the customer
+                pst2.setString(1, customerID);
+                pst2.setString(2, carID);
+                int rows = pst2.executeUpdate();
                 UpdateTable();
 
                 if (rows > 0) {
-                    JOptionPane.showMessageDialog(null, "Customer Added Successfully");
+                    JOptionPane.showMessageDialog(null, "Car rented successfully");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Error. Customer Does Not Exist");
+                    JOptionPane.showMessageDialog(null, "Car rental failed");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Error. Customer ID does not exist.");
             }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-        } finally {
-            try {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (pst != null) {
-                    pst.close();
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Error closing resources: " + e.getMessage());
-            }
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+    }
+
 
 
     }//GEN-LAST:event_RentCarButtonActionPerformed

@@ -544,7 +544,7 @@ public class UpdateCar extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "All Fields Must Be Full");
                     return;
                 }
-
+                
                 String sql = "UPDATE Car3 SET "
                         + "Type = ?, "
                         + "Brand = ?, "
