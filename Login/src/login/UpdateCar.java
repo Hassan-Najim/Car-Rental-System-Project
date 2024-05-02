@@ -441,6 +441,13 @@ Connection con = null;
         // TODO add your handling code here:
     }//GEN-LAST:event_TypeActionPerformed
 
+<<<<<<< HEAD
+=======
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+>>>>>>> parent of 8a817a8 (big update)
     private void table3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table3MouseClicked
 
         int row = table3.getSelectedRow();

@@ -208,6 +208,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
           <Properties>
+<<<<<<< HEAD
             <Property name="text" type="java.lang.String" value="Manufacture Year:"/>
           </Properties>
         </Component>
@@ -352,6 +353,23 @@
                 <StringItem index="0" value="Available"/>
                 <StringItem index="1" value="Not Available"/>
               </StringArray>
+=======
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="9" rowCount="6">
+                <Column editable="false" title="Car ID" type="java.lang.Object"/>
+                <Column editable="false" title="Type" type="java.lang.Object"/>
+                <Column editable="false" title="Brand" type="java.lang.Object"/>
+                <Column editable="false" title="Model" type="java.lang.Object"/>
+                <Column editable="false" title="Color" type="java.lang.Object"/>
+                <Column editable="false" title="License Plate" type="java.lang.Object"/>
+                <Column editable="false" title="Availability" type="java.lang.Object"/>
+                <Column editable="false" title="Hour Rate" type="java.lang.Object"/>
+                <Column editable="false" title="Customer " type="java.lang.Object"/>
+              </Table>
+            </Property>
+            <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+              <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+>>>>>>> parent of 8a817a8 (big update)
             </Property>
           </Properties>
           <Events>
