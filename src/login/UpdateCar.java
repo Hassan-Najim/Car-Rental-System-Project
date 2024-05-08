@@ -545,15 +545,21 @@ public class UpdateCar extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "All Fields Must Be Full");
                     return;
                 }
+                  if (CustomerRenter.isEmpty()) {
+            CustomerRenter = null; // Set it to "0" if empty
+        } else {
+          
                  String customerCheckQuery = "SELECT * FROM Customer4 WHERE ID = ?";
         try (PreparedStatement customerCheckStmt = con.prepareStatement(customerCheckQuery)) {
             customerCheckStmt.setString(1, CustomerRenter);
             ResultSet customerCheckResult = customerCheckStmt.executeQuery();
             if (!customerCheckResult.next()) {
-                JOptionPane.showMessageDialog(null, "Customer ID does not exist in the database");
+                JOptionPane.showMessageDialog(this, "Customer ID does not exist", "Error",JOptionPane.WARNING_MESSAGE);
                 return;
             }
         }
+        
+                }
                 String sql = "UPDATE Car3 SET "
                         + "Type = ?, "
                         + "Brand = ?, "
