@@ -381,7 +381,7 @@ public class AddCar extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel6MouseExited
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        JOptionPane.showMessageDialog(this, "Licene plate Example: 12 AS 1234");
+        JOptionPane.showMessageDialog(this, "Licene plate Example: ABC-123");
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

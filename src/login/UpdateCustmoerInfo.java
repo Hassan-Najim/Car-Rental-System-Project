@@ -459,18 +459,7 @@ table5.setDefaultEditor(Object.class, null);
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
-    private void table5ValueChanged(javax.swing.event.ListSelectionEvent evt) {
-        // Check if the selection is still adjusting
-        if (!evt.getValueIsAdjusting()) {
-            int selectedRow = table5.getSelectedRow();
-            if (selectedRow != -1) {  // Valid row must be selected
-                Object name = table5.getModel().getValueAt(selectedRow, 1); // Assuming name is in column 1
-                Object email = table5.getModel().getValueAt(selectedRow, 2); // Assuming email is in column 2
-                NameToBeInserted.setText(name.toString());
-                EmailToBeInserted.setText(email.toString());
-            }
-        }
-    }
+    
 
     /**
      * @param args the command line arguments

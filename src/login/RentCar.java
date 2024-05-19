@@ -301,7 +301,7 @@ public class RentCar extends javax.swing.JFrame {
         }// </editor-fold>//GEN-END:initComponents
 
     private void RentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentCarButtonActionPerformed
-         String customerID = Customer.getText();
+    String customerID = Customer.getText();
     String customerQuery = "SELECT * FROM Customer4 WHERE ID = ?";
     String carID = id.getText();
     String updateSql = "UPDATE Car3 SET CustomerRenter = ?, Availability = 'Rented' WHERE ID = ?";

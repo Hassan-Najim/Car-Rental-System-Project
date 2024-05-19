@@ -106,7 +106,6 @@ public class Menu extends javax.swing.JFrame {
         });
 
         RentCar.setBackground(new java.awt.Color(255, 232, 191));
-        RentCar.setForeground(new java.awt.Color(0, 0, 0));
         RentCar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MainMenuRentIcon.png"))); // NOI18N
         RentCar.setText(" ");
         RentCar.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(97, 60, 42), 2, true));
@@ -179,7 +178,6 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -189,7 +187,8 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel11)
                         .addGap(27, 27, 27))
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
